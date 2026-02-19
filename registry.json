@@ -1,0 +1,20 @@
+{
+  "apps": [
+    {
+      "name": "sample-app",
+      "display_name": "Sample App",
+      "description": "A minimal test app for SelfStack",
+      "category": "utilities",
+      "repo": "https://github.com/Avanderheyde/selfstack-sample-app",
+      "icon": "",
+      "verified": true
+    }
+  ],
+  "categories": [
+    "finance",
+    "productivity",
+    "utilities",
+    "media",
+    "developer-tools"
+  ]
+}
