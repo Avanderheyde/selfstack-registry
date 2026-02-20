@@ -1,11 +1,11 @@
 {
   "apps": [
     {
-      "name": "sample-app",
-      "display_name": "Sample App",
-      "description": "A minimal test app for SelfStack",
-      "category": "utilities",
-      "repo": "https://github.com/Avanderheyde/selfstack-sample-app",
+      "name": "vibe-costs",
+      "display_name": "Vibe Costs",
+      "description": "Track and manage your vibe coding subscriptions",
+      "category": "finance",
+      "repo": "https://github.com/Avanderheyde/vibe-cost-tracker",
       "icon": "",
       "verified": true
     }
