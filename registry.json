@@ -8,6 +8,15 @@
       "repo": "https://github.com/Avanderheyde/vibe-cost-tracker",
       "icon": "",
       "verified": true
+    },
+    {
+      "name": "track-basket",
+      "display_name": "Track Basket",
+      "description": "Create baskets of stocks and track combined performance over time",
+      "category": "finance",
+      "repo": "https://github.com/Avanderheyde/basket-tracker",
+      "icon": "",
+      "verified": true
     }
   ],
   "categories": [
