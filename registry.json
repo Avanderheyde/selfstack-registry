@@ -15,7 +15,7 @@
       "description": "Create baskets of stocks and track combined performance over time",
       "category": "finance",
       "repo": "https://github.com/Avanderheyde/basket-tracker",
-      "icon": "",
+      "icon": "icon.svg",
       "verified": true
     }
   ],
