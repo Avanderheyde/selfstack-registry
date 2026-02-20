@@ -6,7 +6,7 @@
       "description": "Track and manage your vibe coding subscriptions",
       "category": "finance",
       "repo": "https://github.com/Avanderheyde/vibe-cost-tracker",
-      "icon": "",
+      "icon": "icon.svg",
       "verified": true
     },
     {
