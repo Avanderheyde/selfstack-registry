@@ -25,7 +25,6 @@
       "description": "Lightweight kanban board for AI agent task coordination",
       "category": "developer-tools",
       "repo": "https://github.com/not0xjarvis/agentboard",
-      "version": "0.10.0",
       "verified": false
     }
   ],
