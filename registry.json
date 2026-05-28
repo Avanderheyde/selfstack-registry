@@ -18,6 +18,16 @@
       "repo": "https://github.com/Avanderheyde/basket-tracker",
       "icon": "https://raw.githubusercontent.com/Avanderheyde/basket-tracker/main/public/icon.svg",
       "verified": true
+    },
+    {
+      "name": "agentboard",
+      "display_name": "AgentBoard",
+      "description": "Lightweight kanban board for AI agent task coordination",
+      "category": "developer-tools",
+      "repo": "https://github.com/not0xjarvis/agentboard",
+      "icon": "https://raw.githubusercontent.com/not0xjarvis/agentboard/main/public/icon.svg",
+      "version": "0.10.1",
+      "verified": false
     }
   ],
   "categories": [
