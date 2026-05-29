@@ -1,0 +1,11 @@
+services:
+  app:
+    image: vaultwarden/server:latest
+    restart: unless-stopped
+    ports:
+      - "${SELFSTACK_HOST_PORT:-80}:80"
+    volumes:
+      - vaultwarden-data:/data
+
+volumes:
+  vaultwarden-data:

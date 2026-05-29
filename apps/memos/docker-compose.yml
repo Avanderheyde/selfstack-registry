@@ -1,0 +1,11 @@
+services:
+  app:
+    image: neosmemo/memos:stable
+    restart: unless-stopped
+    ports:
+      - "${SELFSTACK_HOST_PORT:-5230}:5230"
+    volumes:
+      - memos-data:/var/opt/memos
+
+volumes:
+  memos-data:

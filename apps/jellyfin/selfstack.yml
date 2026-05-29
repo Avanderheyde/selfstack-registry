@@ -1,0 +1,18 @@
+name: jellyfin
+display_name: Jellyfin
+description: Free Software media system to stream your movies, shows and music
+version: "1"
+icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/jellyfin.svg
+
+runtime:
+  type: docker-compose
+  entry: docker-compose.yml
+
+expose:
+  port: 8096
+  health: /health
+
+volumes:
+  - jellyfin-config:/config
+  - jellyfin-cache:/cache
+  - jellyfin-media:/media

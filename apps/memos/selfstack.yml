@@ -1,0 +1,16 @@
+name: memos
+display_name: Memos
+description: Open-source, self-hosted note-taking tool for quick Markdown capture
+version: "1"
+icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/memos.svg
+
+runtime:
+  type: docker-compose
+  entry: docker-compose.yml
+
+expose:
+  port: 5230
+  health: /healthz
+
+volumes:
+  - memos-data:/var/opt/memos

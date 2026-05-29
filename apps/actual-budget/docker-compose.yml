@@ -1,0 +1,11 @@
+services:
+  app:
+    image: actualbudget/actual-server:latest
+    restart: unless-stopped
+    ports:
+      - "${SELFSTACK_HOST_PORT:-5006}:5006"
+    volumes:
+      - actual-data:/data
+
+volumes:
+  actual-data:

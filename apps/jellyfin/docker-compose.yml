@@ -1,0 +1,15 @@
+services:
+  app:
+    image: jellyfin/jellyfin:latest
+    restart: unless-stopped
+    ports:
+      - "${SELFSTACK_HOST_PORT:-8096}:8096"
+    volumes:
+      - jellyfin-config:/config
+      - jellyfin-cache:/cache
+      - jellyfin-media:/media
+
+volumes:
+  jellyfin-config:
+  jellyfin-cache:
+  jellyfin-media:

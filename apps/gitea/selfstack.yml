@@ -1,0 +1,16 @@
+name: gitea
+display_name: Gitea
+description: Painless self-hosted all-in-one Git service with code review and CI
+version: "1"
+icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/gitea.svg
+
+runtime:
+  type: docker-compose
+  entry: docker-compose.yml
+
+expose:
+  port: 3000
+  health: /
+
+volumes:
+  - gitea-data:/data

@@ -1,0 +1,17 @@
+name: freshrss
+display_name: FreshRSS
+description: Free, self-hostable RSS and Atom news aggregator
+version: "1"
+icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/freshrss.svg
+
+runtime:
+  type: docker-compose
+  entry: docker-compose.yml
+
+expose:
+  port: 80
+  health: /
+
+volumes:
+  - freshrss-data:/var/www/FreshRSS/data
+  - freshrss-extensions:/var/www/FreshRSS/extensions

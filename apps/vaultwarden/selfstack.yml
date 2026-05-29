@@ -1,0 +1,16 @@
+name: vaultwarden
+display_name: Vaultwarden
+description: Lightweight Bitwarden-compatible password manager server written in Rust
+version: "1"
+icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/vaultwarden.svg
+
+runtime:
+  type: docker-compose
+  entry: docker-compose.yml
+
+expose:
+  port: 80
+  health: /alive
+
+volumes:
+  - vaultwarden-data:/data
