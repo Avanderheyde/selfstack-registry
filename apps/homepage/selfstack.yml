@@ -1,0 +1,16 @@
+name: homepage
+display_name: Homepage
+description: Customizable application dashboard and start page with service integrations
+version: "1"
+icon: https://raw.githubusercontent.com/gethomepage/homepage/main/public/android-chrome-512x512.png
+
+runtime:
+  type: docker-compose
+  entry: docker-compose.yml
+
+expose:
+  port: 3000
+  health: /api/healthcheck
+
+volumes:
+  - homepage-config:/app/config

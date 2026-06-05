@@ -1,0 +1,19 @@
+name: audiobookshelf
+display_name: Audiobookshelf
+description: Self-hosted audiobook and podcast server with web and mobile streaming
+version: "1"
+icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/audiobookshelf.svg
+
+runtime:
+  type: docker-compose
+  entry: docker-compose.yml
+
+expose:
+  port: 80
+  health: /healthcheck
+
+volumes:
+  - audiobookshelf-config:/config
+  - audiobookshelf-metadata:/metadata
+  - audiobookshelf-audiobooks:/audiobooks
+  - audiobookshelf-podcasts:/podcasts

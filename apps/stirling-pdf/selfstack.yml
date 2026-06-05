@@ -1,0 +1,17 @@
+name: stirling-pdf
+display_name: Stirling-PDF
+description: Web-based toolkit to merge, split, convert, OCR and edit PDF files locally
+version: "1"
+icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/stirling-pdf.svg
+
+runtime:
+  type: docker-compose
+  entry: docker-compose.yml
+
+expose:
+  port: 8080
+  health: /
+
+volumes:
+  - stirling-configs:/configs
+  - stirling-tessdata:/usr/share/tessdata

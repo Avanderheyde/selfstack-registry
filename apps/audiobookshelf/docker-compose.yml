@@ -1,0 +1,17 @@
+services:
+  app:
+    image: ghcr.io/advplyr/audiobookshelf:latest
+    restart: unless-stopped
+    ports:
+      - "${SELFSTACK_HOST_PORT:-80}:80"
+    volumes:
+      - audiobookshelf-config:/config
+      - audiobookshelf-metadata:/metadata
+      - audiobookshelf-audiobooks:/audiobooks
+      - audiobookshelf-podcasts:/podcasts
+
+volumes:
+  audiobookshelf-config:
+  audiobookshelf-metadata:
+  audiobookshelf-audiobooks:
+  audiobookshelf-podcasts:

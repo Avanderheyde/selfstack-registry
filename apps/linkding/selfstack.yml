@@ -1,0 +1,16 @@
+name: linkding
+display_name: linkding
+description: Minimal, fast self-hosted bookmark manager with tagging and full-text search
+version: "1"
+icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/linkding.svg
+
+runtime:
+  type: docker-compose
+  entry: docker-compose.yml
+
+expose:
+  port: 9090
+  health: /health
+
+volumes:
+  - linkding-data:/etc/linkding/data

@@ -118,6 +118,76 @@
       "path": "apps/freshrss",
       "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/freshrss.svg",
       "verified": false
+    },
+    {
+      "name": "navidrome",
+      "display_name": "Navidrome",
+      "description": "Self-hosted music server and streamer for your personal audio collection",
+      "category": "media",
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "path": "apps/navidrome",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/navidrome.svg",
+      "verified": false
+    },
+    {
+      "name": "audiobookshelf",
+      "display_name": "Audiobookshelf",
+      "description": "Self-hosted audiobook and podcast server with web and mobile streaming",
+      "category": "media",
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "path": "apps/audiobookshelf",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/audiobookshelf.svg",
+      "verified": false
+    },
+    {
+      "name": "linkding",
+      "display_name": "linkding",
+      "description": "Minimal, fast self-hosted bookmark manager with tagging and full-text search",
+      "category": "productivity",
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "path": "apps/linkding",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/linkding.svg",
+      "verified": false
+    },
+    {
+      "name": "mealie",
+      "display_name": "Mealie",
+      "description": "Self-hosted recipe manager, meal planner and shopping list with recipe scraping",
+      "category": "productivity",
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "path": "apps/mealie",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/mealie.svg",
+      "verified": false
+    },
+    {
+      "name": "stirling-pdf",
+      "display_name": "Stirling-PDF",
+      "description": "Web-based toolkit to merge, split, convert, OCR and edit PDF files locally",
+      "category": "utilities",
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "path": "apps/stirling-pdf",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/stirling-pdf.svg",
+      "verified": false
+    },
+    {
+      "name": "homepage",
+      "display_name": "Homepage",
+      "description": "Customizable application dashboard and start page with service integrations",
+      "category": "utilities",
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "path": "apps/homepage",
+      "icon": "https://raw.githubusercontent.com/gethomepage/homepage/main/public/android-chrome-512x512.png",
+      "verified": false
+    },
+    {
+      "name": "node-red",
+      "display_name": "Node-RED",
+      "description": "Flow-based low-code editor for wiring together automations, devices and APIs",
+      "category": "developer-tools",
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "path": "apps/node-red",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/node-red.svg",
+      "verified": false
     }
   ],
   "categories": [
