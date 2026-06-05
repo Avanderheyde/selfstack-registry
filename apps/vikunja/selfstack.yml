@@ -1,0 +1,17 @@
+name: vikunja
+display_name: Vikunja
+description: The to-do app to organize your life, with lists, kanban and Gantt views
+version: "1"
+icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/vikunja.svg
+
+runtime:
+  type: docker-compose
+  entry: docker-compose.yml
+
+expose:
+  port: 3456
+  health: /
+
+volumes:
+  - vikunja-db:/db
+  - vikunja-files:/app/vikunja/files

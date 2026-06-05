@@ -1,0 +1,16 @@
+name: node-red
+display_name: Node-RED
+description: Flow-based low-code editor for wiring together automations, devices and APIs
+version: "1"
+icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/node-red.svg
+
+runtime:
+  type: docker-compose
+  entry: docker-compose.yml
+
+expose:
+  port: 1880
+  health: /
+
+volumes:
+  - nodered-data:/data

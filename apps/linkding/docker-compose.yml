@@ -1,0 +1,11 @@
+services:
+  app:
+    image: sissbruecker/linkding:latest
+    restart: unless-stopped
+    ports:
+      - "${SELFSTACK_HOST_PORT:-9090}:9090"
+    volumes:
+      - linkding-data:/etc/linkding/data
+
+volumes:
+  linkding-data:

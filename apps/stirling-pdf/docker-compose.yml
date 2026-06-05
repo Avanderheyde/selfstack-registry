@@ -1,0 +1,13 @@
+services:
+  app:
+    image: stirlingtools/stirling-pdf:latest
+    restart: unless-stopped
+    ports:
+      - "${SELFSTACK_HOST_PORT:-8080}:8080"
+    volumes:
+      - stirling-configs:/configs
+      - stirling-tessdata:/usr/share/tessdata
+
+volumes:
+  stirling-configs:
+  stirling-tessdata:

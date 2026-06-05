@@ -1,0 +1,11 @@
+services:
+  app:
+    image: nodered/node-red:latest
+    restart: unless-stopped
+    ports:
+      - "${SELFSTACK_HOST_PORT:-1880}:1880"
+    volumes:
+      - nodered-data:/data
+
+volumes:
+  nodered-data:

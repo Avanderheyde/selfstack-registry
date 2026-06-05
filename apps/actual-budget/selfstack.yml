@@ -1,0 +1,16 @@
+name: actual-budget
+display_name: Actual Budget
+description: Local-first personal finance and envelope budgeting app
+version: "1"
+icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/actual-budget.svg
+
+runtime:
+  type: docker-compose
+  entry: docker-compose.yml
+
+expose:
+  port: 5006
+  health: /
+
+volumes:
+  - actual-data:/data

@@ -1,0 +1,17 @@
+name: navidrome
+display_name: Navidrome
+description: Self-hosted music server and streamer for your personal audio collection
+version: "1"
+icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/navidrome.svg
+
+runtime:
+  type: docker-compose
+  entry: docker-compose.yml
+
+expose:
+  port: 4533
+  health: /ping
+
+volumes:
+  - navidrome-data:/data
+  - navidrome-music:/music

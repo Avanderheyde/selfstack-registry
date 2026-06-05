@@ -1,0 +1,24 @@
+services:
+  app:
+    image: vikunja/vikunja:latest
+    restart: unless-stopped
+    # Run as root so the app can write to the freshly-created (root-owned)
+    # named volumes for its SQLite db and uploaded files.
+    user: "0:0"
+    environment:
+      - VIKUNJA_DATABASE_TYPE=sqlite
+      - VIKUNJA_DATABASE_PATH=/db/vikunja.db
+      - VIKUNJA_FILES_BASEPATH=/app/vikunja/files
+      # API and frontend are served from the same origin in this image, so
+      # CORS is unnecessary. Disabling it avoids the mandatory publicurl that
+      # CORS otherwise requires — a value a generic installer cannot know.
+      - VIKUNJA_CORS_ENABLE=false
+    ports:
+      - "${SELFSTACK_HOST_PORT:-3456}:3456"
+    volumes:
+      - vikunja-db:/db
+      - vikunja-files:/app/vikunja/files
+
+volumes:
+  vikunja-db:
+  vikunja-files:

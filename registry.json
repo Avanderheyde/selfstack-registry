@@ -28,6 +28,166 @@
       "icon": "https://raw.githubusercontent.com/not0xjarvis/agentboard/main/public/icon.svg",
       "version": "0.10.1",
       "verified": false
+    },
+    {
+      "name": "actual-budget",
+      "display_name": "Actual Budget",
+      "description": "Local-first personal finance and envelope budgeting app",
+      "category": "finance",
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "path": "apps/actual-budget",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/actual-budget.svg",
+      "verified": false
+    },
+    {
+      "name": "paperless-ngx",
+      "display_name": "Paperless-ngx",
+      "description": "Scan, index and archive your documents into a searchable digital archive",
+      "category": "productivity",
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "path": "apps/paperless-ngx",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/paperless-ngx.svg",
+      "verified": false
+    },
+    {
+      "name": "memos",
+      "display_name": "Memos",
+      "description": "Open-source, self-hosted note-taking tool for quick Markdown capture",
+      "category": "productivity",
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "path": "apps/memos",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/memos.svg",
+      "verified": false
+    },
+    {
+      "name": "vikunja",
+      "display_name": "Vikunja",
+      "description": "The to-do app to organize your life, with lists, kanban and Gantt views",
+      "category": "productivity",
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "path": "apps/vikunja",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/vikunja.svg",
+      "verified": false
+    },
+    {
+      "name": "jellyfin",
+      "display_name": "Jellyfin",
+      "description": "Free Software media system to stream your movies, shows and music",
+      "category": "media",
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "path": "apps/jellyfin",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/jellyfin.svg",
+      "verified": false
+    },
+    {
+      "name": "gitea",
+      "display_name": "Gitea",
+      "description": "Painless self-hosted all-in-one Git service with code review and CI",
+      "category": "developer-tools",
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "path": "apps/gitea",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/gitea.svg",
+      "verified": false
+    },
+    {
+      "name": "uptime-kuma",
+      "display_name": "Uptime Kuma",
+      "description": "Fancy self-hosted monitoring tool for uptime and status pages",
+      "category": "utilities",
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "path": "apps/uptime-kuma",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/uptime-kuma.svg",
+      "verified": false
+    },
+    {
+      "name": "vaultwarden",
+      "display_name": "Vaultwarden",
+      "description": "Lightweight Bitwarden-compatible password manager server written in Rust",
+      "category": "utilities",
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "path": "apps/vaultwarden",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/vaultwarden.svg",
+      "verified": false
+    },
+    {
+      "name": "freshrss",
+      "display_name": "FreshRSS",
+      "description": "Free, self-hostable RSS and Atom news aggregator",
+      "category": "utilities",
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "path": "apps/freshrss",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/freshrss.svg",
+      "verified": false
+    },
+    {
+      "name": "navidrome",
+      "display_name": "Navidrome",
+      "description": "Self-hosted music server and streamer for your personal audio collection",
+      "category": "media",
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "path": "apps/navidrome",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/navidrome.svg",
+      "verified": false
+    },
+    {
+      "name": "audiobookshelf",
+      "display_name": "Audiobookshelf",
+      "description": "Self-hosted audiobook and podcast server with web and mobile streaming",
+      "category": "media",
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "path": "apps/audiobookshelf",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/audiobookshelf.svg",
+      "verified": false
+    },
+    {
+      "name": "linkding",
+      "display_name": "linkding",
+      "description": "Minimal, fast self-hosted bookmark manager with tagging and full-text search",
+      "category": "productivity",
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "path": "apps/linkding",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/linkding.svg",
+      "verified": false
+    },
+    {
+      "name": "mealie",
+      "display_name": "Mealie",
+      "description": "Self-hosted recipe manager, meal planner and shopping list with recipe scraping",
+      "category": "productivity",
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "path": "apps/mealie",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/mealie.svg",
+      "verified": false
+    },
+    {
+      "name": "stirling-pdf",
+      "display_name": "Stirling-PDF",
+      "description": "Web-based toolkit to merge, split, convert, OCR and edit PDF files locally",
+      "category": "utilities",
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "path": "apps/stirling-pdf",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/stirling-pdf.svg",
+      "verified": false
+    },
+    {
+      "name": "homepage",
+      "display_name": "Homepage",
+      "description": "Customizable application dashboard and start page with service integrations",
+      "category": "utilities",
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "path": "apps/homepage",
+      "icon": "https://raw.githubusercontent.com/gethomepage/homepage/main/public/android-chrome-512x512.png",
+      "verified": false
+    },
+    {
+      "name": "node-red",
+      "display_name": "Node-RED",
+      "description": "Flow-based low-code editor for wiring together automations, devices and APIs",
+      "category": "developer-tools",
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "path": "apps/node-red",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/node-red.svg",
+      "verified": false
     }
   ],
   "categories": [

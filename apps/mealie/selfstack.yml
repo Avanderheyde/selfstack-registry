@@ -1,0 +1,16 @@
+name: mealie
+display_name: Mealie
+description: Self-hosted recipe manager, meal planner and shopping list with recipe scraping
+version: "1"
+icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/mealie.svg
+
+runtime:
+  type: docker-compose
+  entry: docker-compose.yml
+
+expose:
+  port: 9000
+  health: /api/app/about
+
+volumes:
+  - mealie-data:/app/data

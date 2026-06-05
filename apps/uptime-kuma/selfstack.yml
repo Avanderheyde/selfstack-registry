@@ -1,0 +1,16 @@
+name: uptime-kuma
+display_name: Uptime Kuma
+description: Fancy self-hosted monitoring tool for uptime and status pages
+version: "1"
+icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/uptime-kuma.svg
+
+runtime:
+  type: docker-compose
+  entry: docker-compose.yml
+
+expose:
+  port: 3001
+  health: /
+
+volumes:
+  - uptime-kuma-data:/app/data

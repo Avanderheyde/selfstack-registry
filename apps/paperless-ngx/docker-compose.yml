@@ -1,0 +1,24 @@
+services:
+  broker:
+    image: redis:7
+    restart: unless-stopped
+    volumes:
+      - paperless-redis:/data
+
+  app:
+    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    restart: unless-stopped
+    depends_on:
+      - broker
+    ports:
+      - "${SELFSTACK_HOST_PORT:-8000}:8000"
+    environment:
+      - PAPERLESS_REDIS=redis://broker:6379
+    volumes:
+      - paperless-data:/usr/src/paperless/data
+      - paperless-media:/usr/src/paperless/media
+
+volumes:
+  paperless-redis:
+  paperless-data:
+  paperless-media:

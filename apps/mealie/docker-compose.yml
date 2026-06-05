@@ -1,0 +1,13 @@
+services:
+  app:
+    image: ghcr.io/mealie-recipes/mealie:latest
+    restart: unless-stopped
+    # Defaults to the bundled SQLite database, so no external Postgres service
+    # is required for a single-container install.
+    ports:
+      - "${SELFSTACK_HOST_PORT:-9000}:9000"
+    volumes:
+      - mealie-data:/app/data
+
+volumes:
+  mealie-data:

@@ -1,0 +1,16 @@
+services:
+  app:
+    image: ghcr.io/gethomepage/homepage:latest
+    restart: unless-stopped
+    environment:
+      # Homepage v1+ rejects requests whose Host is not localhost unless it is
+      # allow-listed. "*" permits any host — appropriate for a trusted
+      # self-hosted LAN deployment where access is reached via IP or hostname.
+      - HOMEPAGE_ALLOWED_HOSTS=*
+    ports:
+      - "${SELFSTACK_HOST_PORT:-3000}:3000"
+    volumes:
+      - homepage-config:/app/config
+
+volumes:
+  homepage-config:

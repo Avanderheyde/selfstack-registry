@@ -1,0 +1,14 @@
+services:
+  app:
+    image: gitea/gitea:latest
+    restart: unless-stopped
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+    ports:
+      - "${SELFSTACK_HOST_PORT:-3000}:3000"
+    volumes:
+      - gitea-data:/data
+
+volumes:
+  gitea-data:

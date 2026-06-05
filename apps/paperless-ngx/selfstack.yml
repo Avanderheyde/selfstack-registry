@@ -1,0 +1,17 @@
+name: paperless-ngx
+display_name: Paperless-ngx
+description: Scan, index and archive your documents into a searchable digital archive
+version: "1"
+icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/paperless-ngx.svg
+
+runtime:
+  type: docker-compose
+  entry: docker-compose.yml
+
+expose:
+  port: 8000
+  health: /
+
+volumes:
+  - paperless-data:/usr/src/paperless/data
+  - paperless-media:/usr/src/paperless/media
