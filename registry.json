@@ -188,6 +188,16 @@
       "path": "apps/node-red",
       "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/node-red.svg",
       "verified": false
+    },
+    {
+      "name": "twenty",
+      "display_name": "Twenty",
+      "description": "Open-source CRM to manage contacts, companies, deals and sales pipelines",
+      "category": "productivity",
+      "repo": "https://github.com/twentyhq/twenty",
+      "path": "apps/twenty",
+      "icon": "https://raw.githubusercontent.com/twentyhq/twenty/main/packages/twenty-front/public/images/icons/android/android-launchericon-512-512.png",
+      "verified": false
     }
   ],
   "categories": [

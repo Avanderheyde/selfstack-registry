@@ -1,0 +1,23 @@
+name: twenty
+display_name: Twenty
+description: Open-source CRM to manage contacts, companies, deals and sales pipelines
+version: "1"
+icon: https://raw.githubusercontent.com/twentyhq/twenty/main/packages/twenty-front/public/images/icons/android/android-launchericon-512-512.png
+
+runtime:
+  type: docker-compose
+  entry: docker-compose.yml
+
+# The compose ships with working defaults so it boots out of the box. Before
+# exposing the instance, override these via the environment (or an .env file):
+#   APP_SECRET   secret used to sign sessions — set to `openssl rand -base64 32`
+#   SERVER_URL   public URL of the instance (default http://localhost:3000)
+#   PG_DATABASE_PASSWORD   Postgres password (default: postgres)
+
+expose:
+  port: 3000
+  health: /healthz
+
+volumes:
+  - twenty-db-data:/var/lib/postgresql/data
+  - twenty-server-data:/app/packages/twenty-server/.local-storage
