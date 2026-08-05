@@ -12,6 +12,12 @@ expose:
   port: 8000
   health: /
 
+# Django + celery + OCR workers: 256MB (the platform default) OOM-loops on
+# first boot. Proven live 2026-08-05.
+resources:
+  memory_min_mb: 512
+  memory_recommended_mb: 1024
+
 volumes:
   - paperless-data:/usr/src/paperless/data
   - paperless-media:/usr/src/paperless/media

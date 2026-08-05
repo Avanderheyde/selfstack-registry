@@ -14,6 +14,9 @@ services:
       - "${SELFSTACK_HOST_PORT:-8000}:8000"
     environment:
       - PAPERLESS_REDIS=redis://broker:6379
+      # Paperless refuses to boot without a unique secret key; the platform
+      # mints one per install and substitutes it at deploy time.
+      - PAPERLESS_SECRET_KEY={{GENERATED}}
     volumes:
       - paperless-data:/usr/src/paperless/data
       - paperless-media:/usr/src/paperless/media

@@ -108,7 +108,8 @@
           }
         ],
         "environment": {
-          "PAPERLESS_REDIS": "redis://broker:6379"
+          "PAPERLESS_REDIS": "redis://broker:6379",
+          "PAPERLESS_SECRET_KEY": "{{GENERATED}}"
         },
         "depends_on": [
           "broker"
@@ -136,8 +137,8 @@
         }
       ],
       "resources": {
-        "memory_min_mb": 128,
-        "memory_recommended_mb": 256,
+        "memory_min_mb": 512,
+        "memory_recommended_mb": 1024,
         "cpu_shares": 256,
         "disk_min_gb": 1
       },
