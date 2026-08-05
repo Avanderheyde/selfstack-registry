@@ -1,0 +1,24 @@
+name: nextcloud
+display_name: Nextcloud
+description: Self-hosted files, photos, calendar and contacts sync (first login admin / selfstack-change-me)
+version: "1"
+icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/nextcloud.svg
+
+runtime:
+  type: docker-compose
+  entry: docker-compose.yml
+
+expose:
+  port: 80
+  # Canonical Nextcloud health/status endpoint; returns 200 with JSON.
+  health: /status.php
+
+# Apache+PHP plus a Postgres sidecar. Nextcloud's own docs set 512MB as the
+# floor; PHP workers reach several hundred MB during file sync and photo
+# preview generation, so the 256MB default would thrash immediately.
+resources:
+  memory_min_mb: 512
+  memory_recommended_mb: 1024
+
+volumes:
+  - nextcloud-data:/var/www/html

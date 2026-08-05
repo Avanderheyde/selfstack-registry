@@ -1,0 +1,23 @@
+name: joplin-server
+display_name: Joplin Server
+description: Sync server for the Joplin note apps (first login admin@localhost / admin — change it)
+version: "1"
+icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/joplin.svg
+
+runtime:
+  type: docker-compose
+  entry: docker-compose.yml
+
+expose:
+  port: 22300
+  # Documented ping endpoint; returns 200 with a "Joplin Server is running" body.
+  health: /api/ping
+
+# Node server plus a Postgres sidecar; note content lives in Postgres, so
+# large note/attachment syncs push both processes well past the 256MB default.
+resources:
+  memory_min_mb: 512
+  memory_recommended_mb: 1024
+
+volumes:
+  - joplin-db-data:/var/lib/postgresql/data

@@ -1,0 +1,22 @@
+services:
+  app:
+    # No rolling 2.6 tag exists on Docker Hub, so pin the latest 2.6.x patch.
+    image: wallabag/wallabag:2.6.14
+    restart: unless-stopped
+    ports:
+      - "${SELFSTACK_HOST_PORT:-80}:80"
+    environment:
+      # Used for absolute URLs in feeds/exports only; the UI itself uses
+      # relative paths, so it works behind the deploy-time tailnet hostname.
+      SYMFONY__ENV__DOMAIN_NAME: http://localhost
+      # Symfony application secret; the platform mints a value per install.
+      SYMFONY__ENV__SECRET: "{{GENERATED}}"
+      # SQLite (the image default) keeps this a single container.
+      SYMFONY__ENV__DATABASE_DRIVER: pdo_sqlite
+    volumes:
+      - wallabag-data:/var/www/wallabag/data
+      - wallabag-images:/var/www/wallabag/web/assets/images
+
+volumes:
+  wallabag-data:
+  wallabag-images:

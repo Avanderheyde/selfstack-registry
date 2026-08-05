@@ -1,0 +1,24 @@
+name: open-webui
+display_name: Open WebUI
+description: Self-hosted AI chat interface — bring your own OpenAI-compatible API key or local models
+version: "1"
+icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/open-webui.svg
+
+runtime:
+  type: docker-compose
+  entry: docker-compose.yml
+
+expose:
+  port: 8080
+  # Documented health endpoint; returns 200.
+  health: /health
+
+# The Python backend bundles a local sentence-transformers embedding model
+# for RAG: it idles well above the 256MB default and spikes when embedding
+# uploaded documents. Upstream docs call 2GB total sufficient for API-only use.
+resources:
+  memory_min_mb: 512
+  memory_recommended_mb: 1024
+
+volumes:
+  - open-webui-data:/app/backend/data

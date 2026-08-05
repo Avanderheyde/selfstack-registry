@@ -1328,6 +1328,477 @@
         "sso_compatible": false,
         "mobile_friendly": false
       }
+    },
+    {
+      "name": "karakeep",
+      "display_name": "Karakeep",
+      "description": "Bookmark-everything app with link archiving, full-text search and AI tagging",
+      "category": "productivity",
+      "tags": [],
+      "replaces": [],
+      "replaces_display": "Readwise Reader",
+      "replaces_price_cents": 999,
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/karakeep.svg",
+      "version": "1",
+      "verified": false,
+      "container": {
+        "image": "ghcr.io/karakeep-app/karakeep:release",
+        "build_from_repo": false,
+        "ports": [
+          {
+            "container_port": 3000,
+            "protocol": "http",
+            "label": "Web UI",
+            "tunnel_expose": true
+          }
+        ],
+        "volumes": [
+          {
+            "name": "karakeep-data",
+            "container_path": "/data",
+            "backup": true,
+            "estimated_size_mb": 100
+          }
+        ],
+        "environment": {
+          "BROWSER_WEB_URL": "http://chrome:9222",
+          "DATA_DIR": "/data",
+          "MEILI_ADDR": "http://meilisearch:7700",
+          "MEILI_MASTER_KEY": "{{SECRET:karakeep_meili_key}}",
+          "NEXTAUTH_SECRET": "{{GENERATED}}",
+          "NEXTAUTH_URL": "http://localhost:3000"
+        },
+        "depends_on": [
+          "chrome",
+          "meilisearch"
+        ]
+      },
+      "sidecars": [
+        {
+          "name": "chrome",
+          "image": "gcr.io/zenika-hub/alpine-chrome:124",
+          "command": [
+            "--no-sandbox",
+            "--disable-gpu",
+            "--disable-dev-shm-usage",
+            "--remote-debugging-address=0.0.0.0",
+            "--remote-debugging-port=9222",
+            "--hide-scrollbars"
+          ],
+          "volumes": [],
+          "environment": {},
+          "resources": {
+            "memory_min_mb": 0,
+            "memory_recommended_mb": 0,
+            "cpu_shares": 0,
+            "disk_min_gb": 0
+          }
+        },
+        {
+          "name": "meilisearch",
+          "image": "getmeili/meilisearch:v1.41.0",
+          "volumes": [
+            {
+              "name": "meilisearch-data",
+              "container_path": "/meili_data",
+              "backup": true,
+              "estimated_size_mb": 100
+            }
+          ],
+          "environment": {
+            "MEILI_MASTER_KEY": "{{SECRET:karakeep_meili_key}}",
+            "MEILI_NO_ANALYTICS": "true"
+          },
+          "resources": {
+            "memory_min_mb": 0,
+            "memory_recommended_mb": 0,
+            "cpu_shares": 0,
+            "disk_min_gb": 0
+          }
+        }
+      ],
+      "resources": {
+        "memory_min_mb": 512,
+        "memory_recommended_mb": 1024,
+        "cpu_shares": 256,
+        "disk_min_gb": 1
+      },
+      "health": {
+        "endpoint": "/api/health",
+        "method": "GET",
+        "expected_status": 200,
+        "interval_seconds": 30,
+        "timeout_seconds": 5,
+        "start_period_seconds": 15
+      },
+      "backup": {
+        "strategy": "volume-snapshot",
+        "pre_backup_cmd": null,
+        "post_backup_cmd": null
+      },
+      "upgrade": {
+        "strategy": "pull-and-restart",
+        "auto_update": true,
+        "requires_migration": false,
+        "rollback_safe": true
+      },
+      "metadata": {
+        "homepage": "https://github.com/Avanderheyde/selfstack-registry",
+        "license": "",
+        "auth_builtin": false,
+        "sso_compatible": false,
+        "mobile_friendly": false
+      }
+    },
+    {
+      "name": "wallabag",
+      "display_name": "wallabag",
+      "description": "Save web articles and read them later, distraction-free (default login wallabag / wallabag)",
+      "category": "productivity",
+      "tags": [],
+      "replaces": [],
+      "replaces_display": "Pocket Premium",
+      "replaces_price_cents": 499,
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/wallabag.svg",
+      "version": "1",
+      "verified": false,
+      "container": {
+        "image": "wallabag/wallabag:2.6.14",
+        "build_from_repo": false,
+        "ports": [
+          {
+            "container_port": 80,
+            "protocol": "http",
+            "label": "Web UI",
+            "tunnel_expose": true
+          }
+        ],
+        "volumes": [
+          {
+            "name": "wallabag-data",
+            "container_path": "/var/www/wallabag/data",
+            "backup": true,
+            "estimated_size_mb": 100
+          },
+          {
+            "name": "wallabag-images",
+            "container_path": "/var/www/wallabag/web/assets/images",
+            "backup": true,
+            "estimated_size_mb": 100
+          }
+        ],
+        "environment": {
+          "SYMFONY__ENV__DATABASE_DRIVER": "pdo_sqlite",
+          "SYMFONY__ENV__DOMAIN_NAME": "http://localhost",
+          "SYMFONY__ENV__SECRET": "{{GENERATED}}"
+        },
+        "depends_on": []
+      },
+      "resources": {
+        "memory_min_mb": 256,
+        "memory_recommended_mb": 512,
+        "cpu_shares": 256,
+        "disk_min_gb": 1
+      },
+      "health": {
+        "endpoint": "/login",
+        "method": "GET",
+        "expected_status": 200,
+        "interval_seconds": 30,
+        "timeout_seconds": 5,
+        "start_period_seconds": 15
+      },
+      "backup": {
+        "strategy": "volume-snapshot",
+        "pre_backup_cmd": null,
+        "post_backup_cmd": null
+      },
+      "upgrade": {
+        "strategy": "pull-and-restart",
+        "auto_update": true,
+        "requires_migration": false,
+        "rollback_safe": true
+      },
+      "metadata": {
+        "homepage": "https://github.com/Avanderheyde/selfstack-registry",
+        "license": "",
+        "auth_builtin": false,
+        "sso_compatible": false,
+        "mobile_friendly": false
+      }
+    },
+    {
+      "name": "joplin-server",
+      "display_name": "Joplin Server",
+      "description": "Sync server for the Joplin note apps (first login admin@localhost / admin — change it)",
+      "category": "productivity",
+      "tags": [],
+      "replaces": [],
+      "replaces_display": "Evernote",
+      "replaces_price_cents": 1049,
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/joplin.svg",
+      "version": "1",
+      "verified": false,
+      "container": {
+        "image": "joplin/server:3.7.1",
+        "build_from_repo": false,
+        "ports": [
+          {
+            "container_port": 22300,
+            "protocol": "http",
+            "label": "Web UI",
+            "tunnel_expose": true
+          }
+        ],
+        "volumes": [],
+        "environment": {
+          "APP_BASE_URL": "http://localhost:22300",
+          "APP_PORT": "22300",
+          "DB_CLIENT": "pg",
+          "POSTGRES_DATABASE": "joplin",
+          "POSTGRES_HOST": "db",
+          "POSTGRES_PASSWORD": "{{SECRET:joplin_db_password}}",
+          "POSTGRES_PORT": "5432",
+          "POSTGRES_USER": "joplin"
+        },
+        "depends_on": [
+          "db"
+        ]
+      },
+      "sidecars": [
+        {
+          "name": "db",
+          "image": "postgres:16",
+          "volumes": [
+            {
+              "name": "joplin-db-data",
+              "container_path": "/var/lib/postgresql/data",
+              "backup": true,
+              "estimated_size_mb": 100
+            }
+          ],
+          "environment": {
+            "POSTGRES_DB": "joplin",
+            "POSTGRES_PASSWORD": "{{SECRET:joplin_db_password}}",
+            "POSTGRES_USER": "joplin"
+          },
+          "resources": {
+            "memory_min_mb": 0,
+            "memory_recommended_mb": 0,
+            "cpu_shares": 0,
+            "disk_min_gb": 0
+          }
+        }
+      ],
+      "resources": {
+        "memory_min_mb": 512,
+        "memory_recommended_mb": 1024,
+        "cpu_shares": 256,
+        "disk_min_gb": 1
+      },
+      "health": {
+        "endpoint": "/api/ping",
+        "method": "GET",
+        "expected_status": 200,
+        "interval_seconds": 30,
+        "timeout_seconds": 5,
+        "start_period_seconds": 15
+      },
+      "backup": {
+        "strategy": "volume-snapshot",
+        "pre_backup_cmd": null,
+        "post_backup_cmd": null
+      },
+      "upgrade": {
+        "strategy": "pull-and-restart",
+        "auto_update": true,
+        "requires_migration": false,
+        "rollback_safe": true
+      },
+      "metadata": {
+        "homepage": "https://github.com/Avanderheyde/selfstack-registry",
+        "license": "",
+        "auth_builtin": false,
+        "sso_compatible": false,
+        "mobile_friendly": false
+      }
+    },
+    {
+      "name": "open-webui",
+      "display_name": "Open WebUI",
+      "description": "Self-hosted AI chat interface — bring your own OpenAI-compatible API key or local models",
+      "category": "productivity",
+      "tags": [],
+      "replaces": [],
+      "replaces_display": "ChatGPT Plus",
+      "replaces_price_cents": 2000,
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/open-webui.svg",
+      "version": "1",
+      "verified": false,
+      "container": {
+        "image": "ghcr.io/open-webui/open-webui:0.8",
+        "build_from_repo": false,
+        "ports": [
+          {
+            "container_port": 8080,
+            "protocol": "http",
+            "label": "Web UI",
+            "tunnel_expose": true
+          }
+        ],
+        "volumes": [
+          {
+            "name": "open-webui-data",
+            "container_path": "/app/backend/data",
+            "backup": true,
+            "estimated_size_mb": 100
+          }
+        ],
+        "environment": {
+          "WEBUI_SECRET_KEY": "{{GENERATED}}"
+        },
+        "depends_on": []
+      },
+      "resources": {
+        "memory_min_mb": 512,
+        "memory_recommended_mb": 1024,
+        "cpu_shares": 256,
+        "disk_min_gb": 1
+      },
+      "health": {
+        "endpoint": "/health",
+        "method": "GET",
+        "expected_status": 200,
+        "interval_seconds": 30,
+        "timeout_seconds": 5,
+        "start_period_seconds": 15
+      },
+      "backup": {
+        "strategy": "volume-snapshot",
+        "pre_backup_cmd": null,
+        "post_backup_cmd": null
+      },
+      "upgrade": {
+        "strategy": "pull-and-restart",
+        "auto_update": true,
+        "requires_migration": false,
+        "rollback_safe": true
+      },
+      "metadata": {
+        "homepage": "https://github.com/Avanderheyde/selfstack-registry",
+        "license": "",
+        "auth_builtin": false,
+        "sso_compatible": false,
+        "mobile_friendly": false
+      }
+    },
+    {
+      "name": "nextcloud",
+      "display_name": "Nextcloud",
+      "description": "Self-hosted files, photos, calendar and contacts sync (first login admin / selfstack-change-me)",
+      "category": "productivity",
+      "tags": [],
+      "replaces": [],
+      "replaces_display": "Dropbox Plus",
+      "replaces_price_cents": 1199,
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/nextcloud.svg",
+      "version": "1",
+      "verified": false,
+      "container": {
+        "image": "nextcloud:stable-apache",
+        "build_from_repo": false,
+        "ports": [
+          {
+            "container_port": 80,
+            "protocol": "http",
+            "label": "Web UI",
+            "tunnel_expose": true
+          }
+        ],
+        "volumes": [
+          {
+            "name": "nextcloud-data",
+            "container_path": "/var/www/html",
+            "backup": true,
+            "estimated_size_mb": 100
+          }
+        ],
+        "environment": {
+          "NEXTCLOUD_ADMIN_PASSWORD": "selfstack-change-me",
+          "NEXTCLOUD_ADMIN_USER": "admin",
+          "NEXTCLOUD_TRUSTED_DOMAINS": "*",
+          "POSTGRES_DB": "nextcloud",
+          "POSTGRES_HOST": "db",
+          "POSTGRES_PASSWORD": "{{SECRET:nextcloud_db_password}}",
+          "POSTGRES_USER": "nextcloud",
+          "TRUSTED_PROXIES": "172.16.0.0/12 192.168.0.0/16 10.0.0.0/8"
+        },
+        "depends_on": [
+          "db"
+        ]
+      },
+      "sidecars": [
+        {
+          "name": "db",
+          "image": "postgres:16",
+          "volumes": [
+            {
+              "name": "nextcloud-db-data",
+              "container_path": "/var/lib/postgresql/data",
+              "backup": true,
+              "estimated_size_mb": 100
+            }
+          ],
+          "environment": {
+            "POSTGRES_DB": "nextcloud",
+            "POSTGRES_PASSWORD": "{{SECRET:nextcloud_db_password}}",
+            "POSTGRES_USER": "nextcloud"
+          },
+          "resources": {
+            "memory_min_mb": 0,
+            "memory_recommended_mb": 0,
+            "cpu_shares": 0,
+            "disk_min_gb": 0
+          }
+        }
+      ],
+      "resources": {
+        "memory_min_mb": 512,
+        "memory_recommended_mb": 1024,
+        "cpu_shares": 256,
+        "disk_min_gb": 1
+      },
+      "health": {
+        "endpoint": "/status.php",
+        "method": "GET",
+        "expected_status": 200,
+        "interval_seconds": 30,
+        "timeout_seconds": 5,
+        "start_period_seconds": 15
+      },
+      "backup": {
+        "strategy": "volume-snapshot",
+        "pre_backup_cmd": null,
+        "post_backup_cmd": null
+      },
+      "upgrade": {
+        "strategy": "pull-and-restart",
+        "auto_update": true,
+        "requires_migration": false,
+        "rollback_safe": true
+      },
+      "metadata": {
+        "homepage": "https://github.com/Avanderheyde/selfstack-registry",
+        "license": "",
+        "auth_builtin": false,
+        "sso_compatible": false,
+        "mobile_friendly": false
+      }
     }
   ],
   "categories": [

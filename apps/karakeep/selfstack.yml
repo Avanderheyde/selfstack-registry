@@ -1,0 +1,24 @@
+name: karakeep
+display_name: Karakeep
+description: Bookmark-everything app with link archiving, full-text search and AI tagging
+version: "1"
+icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/karakeep.svg
+
+runtime:
+  type: docker-compose
+  entry: docker-compose.yml
+
+expose:
+  port: 3000
+  health: /api/health
+
+# Three containers: the Next.js app plus headless-chrome and meilisearch
+# sidecars. The crawler's HTML-parsing subprocess alone defaults to a 512MB
+# heap cap (CRAWLER_PARSER_MEM_LIMIT_MB), and chrome spikes while rendering
+# pages, so the 256MB default would OOM during the first crawl.
+resources:
+  memory_min_mb: 512
+  memory_recommended_mb: 1024
+
+volumes:
+  - karakeep-data:/data

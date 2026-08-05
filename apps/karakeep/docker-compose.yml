@@ -1,0 +1,49 @@
+services:
+  app:
+    image: ghcr.io/karakeep-app/karakeep:release
+    restart: unless-stopped
+    ports:
+      - "${SELFSTACK_HOST_PORT:-3000}:3000"
+    environment:
+      DATA_DIR: /data
+      MEILI_ADDR: http://meilisearch:7700
+      BROWSER_WEB_URL: http://chrome:9222
+      # Signs the auth JWTs; the platform mints a value per install.
+      NEXTAUTH_SECRET: "{{GENERATED}}"
+      # Must match the meilisearch sidecar's master key, hence the shared form.
+      MEILI_MASTER_KEY: "{{SECRET:karakeep_meili_key}}"
+      # The tailnet URL is only known at deploy time; localhost keeps
+      # standalone runs working.
+      NEXTAUTH_URL: http://localhost:3000
+    volumes:
+      - karakeep-data:/data
+    depends_on:
+      - chrome
+      - meilisearch
+
+  chrome:
+    # Headless browser used by the crawler to render and archive pages.
+    image: gcr.io/zenika-hub/alpine-chrome:124
+    restart: unless-stopped
+    command:
+      - --no-sandbox
+      - --disable-gpu
+      - --disable-dev-shm-usage
+      - --remote-debugging-address=0.0.0.0
+      - --remote-debugging-port=9222
+      - --hide-scrollbars
+
+  meilisearch:
+    # Version pinned by upstream's official compose; karakeep's search
+    # integration tracks specific meilisearch releases.
+    image: getmeili/meilisearch:v1.41.0
+    restart: unless-stopped
+    environment:
+      MEILI_NO_ANALYTICS: "true"
+      MEILI_MASTER_KEY: "{{SECRET:karakeep_meili_key}}"
+    volumes:
+      - meilisearch-data:/meili_data
+
+volumes:
+  karakeep-data:
+  meilisearch-data:

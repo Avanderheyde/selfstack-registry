@@ -1,0 +1,18 @@
+services:
+  app:
+    # 0.8 is the current stable minor tag (rolls patch releases); :main is the
+    # development build and :latest tracks it, so neither is safe to pin.
+    image: ghcr.io/open-webui/open-webui:0.8
+    restart: unless-stopped
+    ports:
+      - "${SELFSTACK_HOST_PORT:-8080}:8080"
+    environment:
+      # Signs session tokens; the platform mints a value per install. Without
+      # it the image generates one at random on every restart, logging
+      # everyone out.
+      WEBUI_SECRET_KEY: "{{GENERATED}}"
+    volumes:
+      - open-webui-data:/app/backend/data
+
+volumes:
+  open-webui-data:

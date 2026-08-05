@@ -226,6 +226,66 @@
       "icon": "https://raw.githubusercontent.com/twentyhq/twenty/main/packages/twenty-front/public/images/icons/android/android-launchericon-512-512.png",
       "verified": false,
       "replaces_display": "HubSpot"
+    },
+    {
+      "name": "karakeep",
+      "display_name": "Karakeep",
+      "description": "Bookmark-everything app with link archiving, full-text search and AI tagging",
+      "category": "productivity",
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "path": "apps/karakeep",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/karakeep.svg",
+      "verified": false,
+      "replaces_display": "Readwise Reader",
+      "replaces_price_cents": 999
+    },
+    {
+      "name": "wallabag",
+      "display_name": "wallabag",
+      "description": "Save web articles and read them later, distraction-free (default login wallabag / wallabag)",
+      "category": "productivity",
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "path": "apps/wallabag",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/wallabag.svg",
+      "verified": false,
+      "replaces_display": "Pocket Premium",
+      "replaces_price_cents": 499
+    },
+    {
+      "name": "joplin-server",
+      "display_name": "Joplin Server",
+      "description": "Sync server for the Joplin note apps (first login admin@localhost / admin — change it)",
+      "category": "productivity",
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "path": "apps/joplin-server",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/joplin.svg",
+      "verified": false,
+      "replaces_display": "Evernote",
+      "replaces_price_cents": 1049
+    },
+    {
+      "name": "open-webui",
+      "display_name": "Open WebUI",
+      "description": "Self-hosted AI chat interface — bring your own OpenAI-compatible API key or local models",
+      "category": "productivity",
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "path": "apps/open-webui",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/open-webui.svg",
+      "verified": false,
+      "replaces_display": "ChatGPT Plus",
+      "replaces_price_cents": 2000
+    },
+    {
+      "name": "nextcloud",
+      "display_name": "Nextcloud",
+      "description": "Self-hosted files, photos, calendar and contacts sync (first login admin / selfstack-change-me)",
+      "category": "productivity",
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "path": "apps/nextcloud",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/nextcloud.svg",
+      "verified": false,
+      "replaces_display": "Dropbox Plus",
+      "replaces_price_cents": 1199
     }
   ],
   "categories": [

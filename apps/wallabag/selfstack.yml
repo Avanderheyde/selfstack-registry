@@ -1,0 +1,24 @@
+name: wallabag
+display_name: wallabag
+description: Save web articles and read them later, distraction-free (default login wallabag / wallabag)
+version: "1"
+icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/wallabag.svg
+
+runtime:
+  type: docker-compose
+  entry: docker-compose.yml
+
+expose:
+  port: 80
+  # GET / redirects (302) to the login page; /login itself returns a plain 200.
+  health: /login
+
+# Single PHP/nginx container on SQLite. Runs light once installed, but the
+# first-boot Symfony install + cache warmup spikes past the 128MB floor.
+resources:
+  memory_min_mb: 256
+  memory_recommended_mb: 512
+
+volumes:
+  - wallabag-data:/var/www/wallabag/data
+  - wallabag-images:/var/www/wallabag/web/assets/images

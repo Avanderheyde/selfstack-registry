@@ -1,0 +1,48 @@
+# Deliberately the plain nextcloud image, NOT Nextcloud AIO: AIO requires the
+# Docker socket, which the platform never grants to apps.
+services:
+  app:
+    image: nextcloud:stable-apache
+    restart: unless-stopped
+    ports:
+      - "${SELFSTACK_HOST_PORT:-80}:80"
+    environment:
+      POSTGRES_HOST: db
+      POSTGRES_DB: nextcloud
+      POSTGRES_USER: nextcloud
+      # Shared with the db sidecar, hence the named form.
+      POSTGRES_PASSWORD: "{{SECRET:nextcloud_db_password}}"
+      # Fixed initial credentials (NOT {{GENERATED}}): the platform never
+      # surfaces minted secrets to the user, so a generated admin password
+      # could never be logged in with. The app is only reachable by the owner
+      # over the tailnet; the description tells them to change it after login.
+      NEXTCLOUD_ADMIN_USER: admin
+      NEXTCLOUD_ADMIN_PASSWORD: selfstack-change-me
+      # The app is reached via a proxy hostname unknown at compose time.
+      # Nextcloud's trusted-domain check treats * as a wildcard matching any
+      # run of [-.a-zA-Z0-9] (lib/private/Security/TrustedDomainHelper.php),
+      # so a bare * accepts any hostname.
+      NEXTCLOUD_TRUSTED_DOMAINS: "*"
+      # tailscale serve terminates HTTPS on the host and proxies plain HTTP
+      # from a docker bridge address; trusting the RFC1918 ranges lets
+      # Nextcloud honor its X-Forwarded-Proto/For headers so it generates
+      # https:// URLs instead of redirect-looping to http://.
+      TRUSTED_PROXIES: 172.16.0.0/12 192.168.0.0/16 10.0.0.0/8
+    volumes:
+      - nextcloud-data:/var/www/html
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: nextcloud
+      POSTGRES_USER: nextcloud
+      POSTGRES_PASSWORD: "{{SECRET:nextcloud_db_password}}"
+    volumes:
+      - nextcloud-db-data:/var/lib/postgresql/data
+
+volumes:
+  nextcloud-data:
+  nextcloud-db-data:

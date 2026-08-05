@@ -1,0 +1,36 @@
+services:
+  app:
+    # No rolling 3 / 3.7 multi-arch tag exists on Docker Hub, so pin the
+    # latest stable release.
+    image: joplin/server:3.7.1
+    restart: unless-stopped
+    ports:
+      - "${SELFSTACK_HOST_PORT:-22300}:22300"
+    environment:
+      APP_PORT: "22300"
+      # The tailnet URL is only known at deploy time; localhost keeps
+      # standalone runs working. The admin UI uses relative paths, so it works
+      # behind the proxy — APP_BASE_URL only affects generated links/emails.
+      APP_BASE_URL: http://localhost:22300
+      DB_CLIENT: pg
+      POSTGRES_HOST: db
+      POSTGRES_PORT: "5432"
+      POSTGRES_DATABASE: joplin
+      POSTGRES_USER: joplin
+      # Shared with the db sidecar, hence the named form.
+      POSTGRES_PASSWORD: "{{SECRET:joplin_db_password}}"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: joplin
+      POSTGRES_USER: joplin
+      POSTGRES_PASSWORD: "{{SECRET:joplin_db_password}}"
+    volumes:
+      - joplin-db-data:/var/lib/postgresql/data
+
+volumes:
+  joplin-db-data:
