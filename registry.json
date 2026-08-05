@@ -37,7 +37,9 @@
       "repo": "https://github.com/Avanderheyde/selfstack-registry",
       "path": "apps/actual-budget",
       "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/actual-budget.svg",
-      "verified": false
+      "verified": false,
+      "replaces_display": "YNAB",
+      "replaces_price_cents": 1499
     },
     {
       "name": "paperless-ngx",
@@ -47,7 +49,9 @@
       "repo": "https://github.com/Avanderheyde/selfstack-registry",
       "path": "apps/paperless-ngx",
       "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/paperless-ngx.svg",
-      "verified": false
+      "verified": false,
+      "replaces_display": "Evernote",
+      "replaces_price_cents": 1083
     },
     {
       "name": "memos",
@@ -57,7 +61,8 @@
       "repo": "https://github.com/Avanderheyde/selfstack-registry",
       "path": "apps/memos",
       "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/memos.svg",
-      "verified": false
+      "verified": false,
+      "replaces_display": "Notion"
     },
     {
       "name": "vikunja",
@@ -67,7 +72,9 @@
       "repo": "https://github.com/Avanderheyde/selfstack-registry",
       "path": "apps/vikunja",
       "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/vikunja.svg",
-      "verified": false
+      "verified": false,
+      "replaces_display": "Todoist Pro",
+      "replaces_price_cents": 500
     },
     {
       "name": "jellyfin",
@@ -77,7 +84,9 @@
       "repo": "https://github.com/Avanderheyde/selfstack-registry",
       "path": "apps/jellyfin",
       "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/jellyfin.svg",
-      "verified": false
+      "verified": false,
+      "replaces_display": "Plex Pass",
+      "replaces_price_cents": 699
     },
     {
       "name": "gitea",
@@ -87,7 +96,9 @@
       "repo": "https://github.com/Avanderheyde/selfstack-registry",
       "path": "apps/gitea",
       "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/gitea.svg",
-      "verified": false
+      "verified": false,
+      "replaces_display": "GitHub Team",
+      "replaces_price_cents": 400
     },
     {
       "name": "uptime-kuma",
@@ -97,7 +108,9 @@
       "repo": "https://github.com/Avanderheyde/selfstack-registry",
       "path": "apps/uptime-kuma",
       "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/uptime-kuma.svg",
-      "verified": false
+      "verified": false,
+      "replaces_display": "UptimeRobot",
+      "replaces_price_cents": 800
     },
     {
       "name": "vaultwarden",
@@ -107,7 +120,9 @@
       "repo": "https://github.com/Avanderheyde/selfstack-registry",
       "path": "apps/vaultwarden",
       "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/vaultwarden.svg",
-      "verified": false
+      "verified": false,
+      "replaces_display": "1Password",
+      "replaces_price_cents": 399
     },
     {
       "name": "freshrss",
@@ -117,7 +132,9 @@
       "repo": "https://github.com/Avanderheyde/selfstack-registry",
       "path": "apps/freshrss",
       "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/freshrss.svg",
-      "verified": false
+      "verified": false,
+      "replaces_display": "Feedly Pro",
+      "replaces_price_cents": 800
     },
     {
       "name": "navidrome",
@@ -127,7 +144,9 @@
       "repo": "https://github.com/Avanderheyde/selfstack-registry",
       "path": "apps/navidrome",
       "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/navidrome.svg",
-      "verified": false
+      "verified": false,
+      "replaces_display": "Spotify",
+      "replaces_price_cents": 1199
     },
     {
       "name": "audiobookshelf",
@@ -137,7 +156,9 @@
       "repo": "https://github.com/Avanderheyde/selfstack-registry",
       "path": "apps/audiobookshelf",
       "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/audiobookshelf.svg",
-      "verified": false
+      "verified": false,
+      "replaces_display": "Audible",
+      "replaces_price_cents": 1495
     },
     {
       "name": "linkding",
@@ -147,7 +168,8 @@
       "repo": "https://github.com/Avanderheyde/selfstack-registry",
       "path": "apps/linkding",
       "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/linkding.svg",
-      "verified": false
+      "verified": false,
+      "replaces_display": "Pocket"
     },
     {
       "name": "mealie",
@@ -157,7 +179,8 @@
       "repo": "https://github.com/Avanderheyde/selfstack-registry",
       "path": "apps/mealie",
       "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/mealie.svg",
-      "verified": false
+      "verified": false,
+      "replaces_display": "Paprika"
     },
     {
       "name": "stirling-pdf",
@@ -167,7 +190,9 @@
       "repo": "https://github.com/Avanderheyde/selfstack-registry",
       "path": "apps/stirling-pdf",
       "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/stirling-pdf.svg",
-      "verified": false
+      "verified": false,
+      "replaces_display": "Adobe Acrobat",
+      "replaces_price_cents": 1999
     },
     {
       "name": "homepage",
@@ -187,7 +212,9 @@
       "repo": "https://github.com/Avanderheyde/selfstack-registry",
       "path": "apps/node-red",
       "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/node-red.svg",
-      "verified": false
+      "verified": false,
+      "replaces_display": "Zapier",
+      "replaces_price_cents": 1999
     },
     {
       "name": "twenty",
@@ -197,7 +224,8 @@
       "repo": "https://github.com/twentyhq/twenty",
       "path": "apps/twenty",
       "icon": "https://raw.githubusercontent.com/twentyhq/twenty/main/packages/twenty-front/public/images/icons/android/android-launchericon-512-512.png",
-      "verified": false
+      "verified": false,
+      "replaces_display": "HubSpot"
     }
   ],
   "categories": [
