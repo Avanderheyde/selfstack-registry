@@ -1,0 +1,1339 @@
+{
+  "schema_version": "2.0",
+  "apps": [
+    {
+      "name": "actual-budget",
+      "display_name": "Actual Budget",
+      "description": "Local-first personal finance and envelope budgeting app",
+      "category": "finance",
+      "tags": [],
+      "replaces": [],
+      "replaces_display": "YNAB",
+      "replaces_price_cents": 1499,
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/actual-budget.svg",
+      "version": "1",
+      "verified": false,
+      "container": {
+        "image": "actualbudget/actual-server:latest",
+        "build_from_repo": false,
+        "ports": [
+          {
+            "container_port": 5006,
+            "protocol": "http",
+            "label": "Web UI",
+            "tunnel_expose": true
+          }
+        ],
+        "volumes": [
+          {
+            "name": "actual-data",
+            "container_path": "/data",
+            "backup": true,
+            "estimated_size_mb": 100
+          }
+        ],
+        "environment": {},
+        "depends_on": []
+      },
+      "resources": {
+        "memory_min_mb": 128,
+        "memory_recommended_mb": 256,
+        "cpu_shares": 256,
+        "disk_min_gb": 1
+      },
+      "health": {
+        "endpoint": "/",
+        "method": "GET",
+        "expected_status": 200,
+        "interval_seconds": 30,
+        "timeout_seconds": 5,
+        "start_period_seconds": 15
+      },
+      "backup": {
+        "strategy": "volume-snapshot",
+        "pre_backup_cmd": null,
+        "post_backup_cmd": null
+      },
+      "upgrade": {
+        "strategy": "pull-and-restart",
+        "auto_update": true,
+        "requires_migration": false,
+        "rollback_safe": true
+      },
+      "metadata": {
+        "homepage": "https://github.com/Avanderheyde/selfstack-registry",
+        "license": "",
+        "auth_builtin": false,
+        "sso_compatible": false,
+        "mobile_friendly": false
+      }
+    },
+    {
+      "name": "paperless-ngx",
+      "display_name": "Paperless-ngx",
+      "description": "Scan, index and archive your documents into a searchable digital archive",
+      "category": "productivity",
+      "tags": [],
+      "replaces": [],
+      "replaces_display": "Evernote",
+      "replaces_price_cents": 1083,
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/paperless-ngx.svg",
+      "version": "1",
+      "verified": false,
+      "container": {
+        "image": "ghcr.io/paperless-ngx/paperless-ngx:latest",
+        "build_from_repo": false,
+        "ports": [
+          {
+            "container_port": 8000,
+            "protocol": "http",
+            "label": "Web UI",
+            "tunnel_expose": true
+          }
+        ],
+        "volumes": [
+          {
+            "name": "paperless-data",
+            "container_path": "/usr/src/paperless/data",
+            "backup": true,
+            "estimated_size_mb": 100
+          },
+          {
+            "name": "paperless-media",
+            "container_path": "/usr/src/paperless/media",
+            "backup": true,
+            "estimated_size_mb": 100
+          }
+        ],
+        "environment": {
+          "PAPERLESS_REDIS": "redis://broker:6379"
+        },
+        "depends_on": [
+          "broker"
+        ]
+      },
+      "sidecars": [
+        {
+          "name": "broker",
+          "image": "redis:7",
+          "volumes": [
+            {
+              "name": "paperless-redis",
+              "container_path": "/data",
+              "backup": true,
+              "estimated_size_mb": 100
+            }
+          ],
+          "environment": {},
+          "resources": {
+            "memory_min_mb": 0,
+            "memory_recommended_mb": 0,
+            "cpu_shares": 0,
+            "disk_min_gb": 0
+          }
+        }
+      ],
+      "resources": {
+        "memory_min_mb": 128,
+        "memory_recommended_mb": 256,
+        "cpu_shares": 256,
+        "disk_min_gb": 1
+      },
+      "health": {
+        "endpoint": "/",
+        "method": "GET",
+        "expected_status": 200,
+        "interval_seconds": 30,
+        "timeout_seconds": 5,
+        "start_period_seconds": 15
+      },
+      "backup": {
+        "strategy": "volume-snapshot",
+        "pre_backup_cmd": null,
+        "post_backup_cmd": null
+      },
+      "upgrade": {
+        "strategy": "pull-and-restart",
+        "auto_update": true,
+        "requires_migration": false,
+        "rollback_safe": true
+      },
+      "metadata": {
+        "homepage": "https://github.com/Avanderheyde/selfstack-registry",
+        "license": "",
+        "auth_builtin": false,
+        "sso_compatible": false,
+        "mobile_friendly": false
+      }
+    },
+    {
+      "name": "memos",
+      "display_name": "Memos",
+      "description": "Open-source, self-hosted note-taking tool for quick Markdown capture",
+      "category": "productivity",
+      "tags": [],
+      "replaces": [],
+      "replaces_display": "Notion",
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/memos.svg",
+      "version": "1",
+      "verified": false,
+      "container": {
+        "image": "neosmemo/memos:stable",
+        "build_from_repo": false,
+        "ports": [
+          {
+            "container_port": 5230,
+            "protocol": "http",
+            "label": "Web UI",
+            "tunnel_expose": true
+          }
+        ],
+        "volumes": [
+          {
+            "name": "memos-data",
+            "container_path": "/var/opt/memos",
+            "backup": true,
+            "estimated_size_mb": 100
+          }
+        ],
+        "environment": {},
+        "depends_on": []
+      },
+      "resources": {
+        "memory_min_mb": 128,
+        "memory_recommended_mb": 256,
+        "cpu_shares": 256,
+        "disk_min_gb": 1
+      },
+      "health": {
+        "endpoint": "/healthz",
+        "method": "GET",
+        "expected_status": 200,
+        "interval_seconds": 30,
+        "timeout_seconds": 5,
+        "start_period_seconds": 15
+      },
+      "backup": {
+        "strategy": "volume-snapshot",
+        "pre_backup_cmd": null,
+        "post_backup_cmd": null
+      },
+      "upgrade": {
+        "strategy": "pull-and-restart",
+        "auto_update": true,
+        "requires_migration": false,
+        "rollback_safe": true
+      },
+      "metadata": {
+        "homepage": "https://github.com/Avanderheyde/selfstack-registry",
+        "license": "",
+        "auth_builtin": false,
+        "sso_compatible": false,
+        "mobile_friendly": false
+      }
+    },
+    {
+      "name": "vikunja",
+      "display_name": "Vikunja",
+      "description": "The to-do app to organize your life, with lists, kanban and Gantt views",
+      "category": "productivity",
+      "tags": [],
+      "replaces": [],
+      "replaces_display": "Todoist Pro",
+      "replaces_price_cents": 500,
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/vikunja.svg",
+      "version": "1",
+      "verified": false,
+      "container": {
+        "image": "vikunja/vikunja:latest",
+        "build_from_repo": false,
+        "ports": [
+          {
+            "container_port": 3456,
+            "protocol": "http",
+            "label": "Web UI",
+            "tunnel_expose": true
+          }
+        ],
+        "volumes": [
+          {
+            "name": "vikunja-db",
+            "container_path": "/db",
+            "backup": true,
+            "estimated_size_mb": 100
+          },
+          {
+            "name": "vikunja-files",
+            "container_path": "/app/vikunja/files",
+            "backup": true,
+            "estimated_size_mb": 100
+          }
+        ],
+        "environment": {
+          "VIKUNJA_CORS_ENABLE": "false",
+          "VIKUNJA_DATABASE_PATH": "/db/vikunja.db",
+          "VIKUNJA_DATABASE_TYPE": "sqlite",
+          "VIKUNJA_FILES_BASEPATH": "/app/vikunja/files"
+        },
+        "depends_on": []
+      },
+      "resources": {
+        "memory_min_mb": 128,
+        "memory_recommended_mb": 256,
+        "cpu_shares": 256,
+        "disk_min_gb": 1
+      },
+      "health": {
+        "endpoint": "/",
+        "method": "GET",
+        "expected_status": 200,
+        "interval_seconds": 30,
+        "timeout_seconds": 5,
+        "start_period_seconds": 15
+      },
+      "backup": {
+        "strategy": "volume-snapshot",
+        "pre_backup_cmd": null,
+        "post_backup_cmd": null
+      },
+      "upgrade": {
+        "strategy": "pull-and-restart",
+        "auto_update": true,
+        "requires_migration": false,
+        "rollback_safe": true
+      },
+      "metadata": {
+        "homepage": "https://github.com/Avanderheyde/selfstack-registry",
+        "license": "",
+        "auth_builtin": false,
+        "sso_compatible": false,
+        "mobile_friendly": false
+      }
+    },
+    {
+      "name": "jellyfin",
+      "display_name": "Jellyfin",
+      "description": "Free Software media system to stream your movies, shows and music",
+      "category": "media",
+      "tags": [],
+      "replaces": [],
+      "replaces_display": "Plex Pass",
+      "replaces_price_cents": 699,
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/jellyfin.svg",
+      "version": "1",
+      "verified": false,
+      "container": {
+        "image": "jellyfin/jellyfin:latest",
+        "build_from_repo": false,
+        "ports": [
+          {
+            "container_port": 8096,
+            "protocol": "http",
+            "label": "Web UI",
+            "tunnel_expose": true
+          }
+        ],
+        "volumes": [
+          {
+            "name": "jellyfin-config",
+            "container_path": "/config",
+            "backup": true,
+            "estimated_size_mb": 100
+          },
+          {
+            "name": "jellyfin-cache",
+            "container_path": "/cache",
+            "backup": true,
+            "estimated_size_mb": 100
+          },
+          {
+            "name": "jellyfin-media",
+            "container_path": "/media",
+            "backup": true,
+            "estimated_size_mb": 100
+          }
+        ],
+        "environment": {},
+        "depends_on": []
+      },
+      "resources": {
+        "memory_min_mb": 128,
+        "memory_recommended_mb": 256,
+        "cpu_shares": 256,
+        "disk_min_gb": 1
+      },
+      "health": {
+        "endpoint": "/health",
+        "method": "GET",
+        "expected_status": 200,
+        "interval_seconds": 30,
+        "timeout_seconds": 5,
+        "start_period_seconds": 15
+      },
+      "backup": {
+        "strategy": "volume-snapshot",
+        "pre_backup_cmd": null,
+        "post_backup_cmd": null
+      },
+      "upgrade": {
+        "strategy": "pull-and-restart",
+        "auto_update": true,
+        "requires_migration": false,
+        "rollback_safe": true
+      },
+      "metadata": {
+        "homepage": "https://github.com/Avanderheyde/selfstack-registry",
+        "license": "",
+        "auth_builtin": false,
+        "sso_compatible": false,
+        "mobile_friendly": false
+      }
+    },
+    {
+      "name": "gitea",
+      "display_name": "Gitea",
+      "description": "Painless self-hosted all-in-one Git service with code review and CI",
+      "category": "developer-tools",
+      "tags": [],
+      "replaces": [],
+      "replaces_display": "GitHub Team",
+      "replaces_price_cents": 400,
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/gitea.svg",
+      "version": "1",
+      "verified": false,
+      "container": {
+        "image": "gitea/gitea:latest",
+        "build_from_repo": false,
+        "ports": [
+          {
+            "container_port": 3000,
+            "protocol": "http",
+            "label": "Web UI",
+            "tunnel_expose": true
+          }
+        ],
+        "volumes": [
+          {
+            "name": "gitea-data",
+            "container_path": "/data",
+            "backup": true,
+            "estimated_size_mb": 100
+          }
+        ],
+        "environment": {
+          "USER_GID": "1000",
+          "USER_UID": "1000"
+        },
+        "depends_on": []
+      },
+      "resources": {
+        "memory_min_mb": 128,
+        "memory_recommended_mb": 256,
+        "cpu_shares": 256,
+        "disk_min_gb": 1
+      },
+      "health": {
+        "endpoint": "/",
+        "method": "GET",
+        "expected_status": 200,
+        "interval_seconds": 30,
+        "timeout_seconds": 5,
+        "start_period_seconds": 15
+      },
+      "backup": {
+        "strategy": "volume-snapshot",
+        "pre_backup_cmd": null,
+        "post_backup_cmd": null
+      },
+      "upgrade": {
+        "strategy": "pull-and-restart",
+        "auto_update": true,
+        "requires_migration": false,
+        "rollback_safe": true
+      },
+      "metadata": {
+        "homepage": "https://github.com/Avanderheyde/selfstack-registry",
+        "license": "",
+        "auth_builtin": false,
+        "sso_compatible": false,
+        "mobile_friendly": false
+      }
+    },
+    {
+      "name": "uptime-kuma",
+      "display_name": "Uptime Kuma",
+      "description": "Fancy self-hosted monitoring tool for uptime and status pages",
+      "category": "utilities",
+      "tags": [],
+      "replaces": [],
+      "replaces_display": "UptimeRobot",
+      "replaces_price_cents": 800,
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/uptime-kuma.svg",
+      "version": "1",
+      "verified": false,
+      "container": {
+        "image": "louislam/uptime-kuma:1",
+        "build_from_repo": false,
+        "ports": [
+          {
+            "container_port": 3001,
+            "protocol": "http",
+            "label": "Web UI",
+            "tunnel_expose": true
+          }
+        ],
+        "volumes": [
+          {
+            "name": "uptime-kuma-data",
+            "container_path": "/app/data",
+            "backup": true,
+            "estimated_size_mb": 100
+          }
+        ],
+        "environment": {},
+        "depends_on": []
+      },
+      "resources": {
+        "memory_min_mb": 128,
+        "memory_recommended_mb": 256,
+        "cpu_shares": 256,
+        "disk_min_gb": 1
+      },
+      "health": {
+        "endpoint": "/",
+        "method": "GET",
+        "expected_status": 200,
+        "interval_seconds": 30,
+        "timeout_seconds": 5,
+        "start_period_seconds": 15
+      },
+      "backup": {
+        "strategy": "volume-snapshot",
+        "pre_backup_cmd": null,
+        "post_backup_cmd": null
+      },
+      "upgrade": {
+        "strategy": "pull-and-restart",
+        "auto_update": true,
+        "requires_migration": false,
+        "rollback_safe": true
+      },
+      "metadata": {
+        "homepage": "https://github.com/Avanderheyde/selfstack-registry",
+        "license": "",
+        "auth_builtin": false,
+        "sso_compatible": false,
+        "mobile_friendly": false
+      }
+    },
+    {
+      "name": "vaultwarden",
+      "display_name": "Vaultwarden",
+      "description": "Lightweight Bitwarden-compatible password manager server written in Rust",
+      "category": "utilities",
+      "tags": [],
+      "replaces": [],
+      "replaces_display": "1Password",
+      "replaces_price_cents": 399,
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/vaultwarden.svg",
+      "version": "1",
+      "verified": false,
+      "container": {
+        "image": "vaultwarden/server:latest",
+        "build_from_repo": false,
+        "ports": [
+          {
+            "container_port": 80,
+            "protocol": "http",
+            "label": "Web UI",
+            "tunnel_expose": true
+          }
+        ],
+        "volumes": [
+          {
+            "name": "vaultwarden-data",
+            "container_path": "/data",
+            "backup": true,
+            "estimated_size_mb": 100
+          }
+        ],
+        "environment": {},
+        "depends_on": []
+      },
+      "resources": {
+        "memory_min_mb": 128,
+        "memory_recommended_mb": 256,
+        "cpu_shares": 256,
+        "disk_min_gb": 1
+      },
+      "health": {
+        "endpoint": "/alive",
+        "method": "GET",
+        "expected_status": 200,
+        "interval_seconds": 30,
+        "timeout_seconds": 5,
+        "start_period_seconds": 15
+      },
+      "backup": {
+        "strategy": "volume-snapshot",
+        "pre_backup_cmd": null,
+        "post_backup_cmd": null
+      },
+      "upgrade": {
+        "strategy": "pull-and-restart",
+        "auto_update": true,
+        "requires_migration": false,
+        "rollback_safe": true
+      },
+      "metadata": {
+        "homepage": "https://github.com/Avanderheyde/selfstack-registry",
+        "license": "",
+        "auth_builtin": false,
+        "sso_compatible": false,
+        "mobile_friendly": false
+      }
+    },
+    {
+      "name": "freshrss",
+      "display_name": "FreshRSS",
+      "description": "Free, self-hostable RSS and Atom news aggregator",
+      "category": "utilities",
+      "tags": [],
+      "replaces": [],
+      "replaces_display": "Feedly Pro",
+      "replaces_price_cents": 800,
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/freshrss.svg",
+      "version": "1",
+      "verified": false,
+      "container": {
+        "image": "freshrss/freshrss:latest",
+        "build_from_repo": false,
+        "ports": [
+          {
+            "container_port": 80,
+            "protocol": "http",
+            "label": "Web UI",
+            "tunnel_expose": true
+          }
+        ],
+        "volumes": [
+          {
+            "name": "freshrss-data",
+            "container_path": "/var/www/FreshRSS/data",
+            "backup": true,
+            "estimated_size_mb": 100
+          },
+          {
+            "name": "freshrss-extensions",
+            "container_path": "/var/www/FreshRSS/extensions",
+            "backup": true,
+            "estimated_size_mb": 100
+          }
+        ],
+        "environment": {},
+        "depends_on": []
+      },
+      "resources": {
+        "memory_min_mb": 128,
+        "memory_recommended_mb": 256,
+        "cpu_shares": 256,
+        "disk_min_gb": 1
+      },
+      "health": {
+        "endpoint": "/",
+        "method": "GET",
+        "expected_status": 200,
+        "interval_seconds": 30,
+        "timeout_seconds": 5,
+        "start_period_seconds": 15
+      },
+      "backup": {
+        "strategy": "volume-snapshot",
+        "pre_backup_cmd": null,
+        "post_backup_cmd": null
+      },
+      "upgrade": {
+        "strategy": "pull-and-restart",
+        "auto_update": true,
+        "requires_migration": false,
+        "rollback_safe": true
+      },
+      "metadata": {
+        "homepage": "https://github.com/Avanderheyde/selfstack-registry",
+        "license": "",
+        "auth_builtin": false,
+        "sso_compatible": false,
+        "mobile_friendly": false
+      }
+    },
+    {
+      "name": "navidrome",
+      "display_name": "Navidrome",
+      "description": "Self-hosted music server and streamer for your personal audio collection",
+      "category": "media",
+      "tags": [],
+      "replaces": [],
+      "replaces_display": "Spotify",
+      "replaces_price_cents": 1199,
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/navidrome.svg",
+      "version": "1",
+      "verified": false,
+      "container": {
+        "image": "deluan/navidrome:latest",
+        "build_from_repo": false,
+        "ports": [
+          {
+            "container_port": 4533,
+            "protocol": "http",
+            "label": "Web UI",
+            "tunnel_expose": true
+          }
+        ],
+        "volumes": [
+          {
+            "name": "navidrome-data",
+            "container_path": "/data",
+            "backup": true,
+            "estimated_size_mb": 100
+          },
+          {
+            "name": "navidrome-music",
+            "container_path": "/music",
+            "backup": true,
+            "estimated_size_mb": 100
+          }
+        ],
+        "environment": {},
+        "depends_on": []
+      },
+      "resources": {
+        "memory_min_mb": 128,
+        "memory_recommended_mb": 256,
+        "cpu_shares": 256,
+        "disk_min_gb": 1
+      },
+      "health": {
+        "endpoint": "/ping",
+        "method": "GET",
+        "expected_status": 200,
+        "interval_seconds": 30,
+        "timeout_seconds": 5,
+        "start_period_seconds": 15
+      },
+      "backup": {
+        "strategy": "volume-snapshot",
+        "pre_backup_cmd": null,
+        "post_backup_cmd": null
+      },
+      "upgrade": {
+        "strategy": "pull-and-restart",
+        "auto_update": true,
+        "requires_migration": false,
+        "rollback_safe": true
+      },
+      "metadata": {
+        "homepage": "https://github.com/Avanderheyde/selfstack-registry",
+        "license": "",
+        "auth_builtin": false,
+        "sso_compatible": false,
+        "mobile_friendly": false
+      }
+    },
+    {
+      "name": "audiobookshelf",
+      "display_name": "Audiobookshelf",
+      "description": "Self-hosted audiobook and podcast server with web and mobile streaming",
+      "category": "media",
+      "tags": [],
+      "replaces": [],
+      "replaces_display": "Audible",
+      "replaces_price_cents": 1495,
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/audiobookshelf.svg",
+      "version": "1",
+      "verified": false,
+      "container": {
+        "image": "ghcr.io/advplyr/audiobookshelf:latest",
+        "build_from_repo": false,
+        "ports": [
+          {
+            "container_port": 80,
+            "protocol": "http",
+            "label": "Web UI",
+            "tunnel_expose": true
+          }
+        ],
+        "volumes": [
+          {
+            "name": "audiobookshelf-config",
+            "container_path": "/config",
+            "backup": true,
+            "estimated_size_mb": 100
+          },
+          {
+            "name": "audiobookshelf-metadata",
+            "container_path": "/metadata",
+            "backup": true,
+            "estimated_size_mb": 100
+          },
+          {
+            "name": "audiobookshelf-audiobooks",
+            "container_path": "/audiobooks",
+            "backup": true,
+            "estimated_size_mb": 100
+          },
+          {
+            "name": "audiobookshelf-podcasts",
+            "container_path": "/podcasts",
+            "backup": true,
+            "estimated_size_mb": 100
+          }
+        ],
+        "environment": {},
+        "depends_on": []
+      },
+      "resources": {
+        "memory_min_mb": 128,
+        "memory_recommended_mb": 256,
+        "cpu_shares": 256,
+        "disk_min_gb": 1
+      },
+      "health": {
+        "endpoint": "/healthcheck",
+        "method": "GET",
+        "expected_status": 200,
+        "interval_seconds": 30,
+        "timeout_seconds": 5,
+        "start_period_seconds": 15
+      },
+      "backup": {
+        "strategy": "volume-snapshot",
+        "pre_backup_cmd": null,
+        "post_backup_cmd": null
+      },
+      "upgrade": {
+        "strategy": "pull-and-restart",
+        "auto_update": true,
+        "requires_migration": false,
+        "rollback_safe": true
+      },
+      "metadata": {
+        "homepage": "https://github.com/Avanderheyde/selfstack-registry",
+        "license": "",
+        "auth_builtin": false,
+        "sso_compatible": false,
+        "mobile_friendly": false
+      }
+    },
+    {
+      "name": "linkding",
+      "display_name": "linkding",
+      "description": "Minimal, fast self-hosted bookmark manager with tagging and full-text search",
+      "category": "productivity",
+      "tags": [],
+      "replaces": [],
+      "replaces_display": "Pocket",
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/linkding.svg",
+      "version": "1",
+      "verified": false,
+      "container": {
+        "image": "sissbruecker/linkding:latest",
+        "build_from_repo": false,
+        "ports": [
+          {
+            "container_port": 9090,
+            "protocol": "http",
+            "label": "Web UI",
+            "tunnel_expose": true
+          }
+        ],
+        "volumes": [
+          {
+            "name": "linkding-data",
+            "container_path": "/etc/linkding/data",
+            "backup": true,
+            "estimated_size_mb": 100
+          }
+        ],
+        "environment": {},
+        "depends_on": []
+      },
+      "resources": {
+        "memory_min_mb": 128,
+        "memory_recommended_mb": 256,
+        "cpu_shares": 256,
+        "disk_min_gb": 1
+      },
+      "health": {
+        "endpoint": "/health",
+        "method": "GET",
+        "expected_status": 200,
+        "interval_seconds": 30,
+        "timeout_seconds": 5,
+        "start_period_seconds": 15
+      },
+      "backup": {
+        "strategy": "volume-snapshot",
+        "pre_backup_cmd": null,
+        "post_backup_cmd": null
+      },
+      "upgrade": {
+        "strategy": "pull-and-restart",
+        "auto_update": true,
+        "requires_migration": false,
+        "rollback_safe": true
+      },
+      "metadata": {
+        "homepage": "https://github.com/Avanderheyde/selfstack-registry",
+        "license": "",
+        "auth_builtin": false,
+        "sso_compatible": false,
+        "mobile_friendly": false
+      }
+    },
+    {
+      "name": "mealie",
+      "display_name": "Mealie",
+      "description": "Self-hosted recipe manager, meal planner and shopping list with recipe scraping",
+      "category": "productivity",
+      "tags": [],
+      "replaces": [],
+      "replaces_display": "Paprika",
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/mealie.svg",
+      "version": "1",
+      "verified": false,
+      "container": {
+        "image": "ghcr.io/mealie-recipes/mealie:latest",
+        "build_from_repo": false,
+        "ports": [
+          {
+            "container_port": 9000,
+            "protocol": "http",
+            "label": "Web UI",
+            "tunnel_expose": true
+          }
+        ],
+        "volumes": [
+          {
+            "name": "mealie-data",
+            "container_path": "/app/data",
+            "backup": true,
+            "estimated_size_mb": 100
+          }
+        ],
+        "environment": {},
+        "depends_on": []
+      },
+      "resources": {
+        "memory_min_mb": 128,
+        "memory_recommended_mb": 256,
+        "cpu_shares": 256,
+        "disk_min_gb": 1
+      },
+      "health": {
+        "endpoint": "/api/app/about",
+        "method": "GET",
+        "expected_status": 200,
+        "interval_seconds": 30,
+        "timeout_seconds": 5,
+        "start_period_seconds": 15
+      },
+      "backup": {
+        "strategy": "volume-snapshot",
+        "pre_backup_cmd": null,
+        "post_backup_cmd": null
+      },
+      "upgrade": {
+        "strategy": "pull-and-restart",
+        "auto_update": true,
+        "requires_migration": false,
+        "rollback_safe": true
+      },
+      "metadata": {
+        "homepage": "https://github.com/Avanderheyde/selfstack-registry",
+        "license": "",
+        "auth_builtin": false,
+        "sso_compatible": false,
+        "mobile_friendly": false
+      }
+    },
+    {
+      "name": "stirling-pdf",
+      "display_name": "Stirling-PDF",
+      "description": "Web-based toolkit to merge, split, convert, OCR and edit PDF files locally",
+      "category": "utilities",
+      "tags": [],
+      "replaces": [],
+      "replaces_display": "Adobe Acrobat",
+      "replaces_price_cents": 1999,
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/stirling-pdf.svg",
+      "version": "1",
+      "verified": false,
+      "container": {
+        "image": "stirlingtools/stirling-pdf:latest",
+        "build_from_repo": false,
+        "ports": [
+          {
+            "container_port": 8080,
+            "protocol": "http",
+            "label": "Web UI",
+            "tunnel_expose": true
+          }
+        ],
+        "volumes": [
+          {
+            "name": "stirling-configs",
+            "container_path": "/configs",
+            "backup": true,
+            "estimated_size_mb": 100
+          },
+          {
+            "name": "stirling-tessdata",
+            "container_path": "/usr/share/tessdata",
+            "backup": true,
+            "estimated_size_mb": 100
+          }
+        ],
+        "environment": {},
+        "depends_on": []
+      },
+      "resources": {
+        "memory_min_mb": 128,
+        "memory_recommended_mb": 256,
+        "cpu_shares": 256,
+        "disk_min_gb": 1
+      },
+      "health": {
+        "endpoint": "/",
+        "method": "GET",
+        "expected_status": 200,
+        "interval_seconds": 30,
+        "timeout_seconds": 5,
+        "start_period_seconds": 15
+      },
+      "backup": {
+        "strategy": "volume-snapshot",
+        "pre_backup_cmd": null,
+        "post_backup_cmd": null
+      },
+      "upgrade": {
+        "strategy": "pull-and-restart",
+        "auto_update": true,
+        "requires_migration": false,
+        "rollback_safe": true
+      },
+      "metadata": {
+        "homepage": "https://github.com/Avanderheyde/selfstack-registry",
+        "license": "",
+        "auth_builtin": false,
+        "sso_compatible": false,
+        "mobile_friendly": false
+      }
+    },
+    {
+      "name": "homepage",
+      "display_name": "Homepage",
+      "description": "Customizable application dashboard and start page with service integrations",
+      "category": "utilities",
+      "tags": [],
+      "replaces": [],
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "icon": "https://raw.githubusercontent.com/gethomepage/homepage/main/public/android-chrome-512x512.png",
+      "version": "1",
+      "verified": false,
+      "container": {
+        "image": "ghcr.io/gethomepage/homepage:latest",
+        "build_from_repo": false,
+        "ports": [
+          {
+            "container_port": 3000,
+            "protocol": "http",
+            "label": "Web UI",
+            "tunnel_expose": true
+          }
+        ],
+        "volumes": [
+          {
+            "name": "homepage-config",
+            "container_path": "/app/config",
+            "backup": true,
+            "estimated_size_mb": 100
+          }
+        ],
+        "environment": {
+          "HOMEPAGE_ALLOWED_HOSTS": "*"
+        },
+        "depends_on": []
+      },
+      "resources": {
+        "memory_min_mb": 128,
+        "memory_recommended_mb": 256,
+        "cpu_shares": 256,
+        "disk_min_gb": 1
+      },
+      "health": {
+        "endpoint": "/api/healthcheck",
+        "method": "GET",
+        "expected_status": 200,
+        "interval_seconds": 30,
+        "timeout_seconds": 5,
+        "start_period_seconds": 15
+      },
+      "backup": {
+        "strategy": "volume-snapshot",
+        "pre_backup_cmd": null,
+        "post_backup_cmd": null
+      },
+      "upgrade": {
+        "strategy": "pull-and-restart",
+        "auto_update": true,
+        "requires_migration": false,
+        "rollback_safe": true
+      },
+      "metadata": {
+        "homepage": "https://github.com/Avanderheyde/selfstack-registry",
+        "license": "",
+        "auth_builtin": false,
+        "sso_compatible": false,
+        "mobile_friendly": false
+      }
+    },
+    {
+      "name": "node-red",
+      "display_name": "Node-RED",
+      "description": "Flow-based low-code editor for wiring together automations, devices and APIs",
+      "category": "developer-tools",
+      "tags": [],
+      "replaces": [],
+      "replaces_display": "Zapier",
+      "replaces_price_cents": 1999,
+      "repo": "https://github.com/Avanderheyde/selfstack-registry",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/node-red.svg",
+      "version": "1",
+      "verified": false,
+      "container": {
+        "image": "nodered/node-red:latest",
+        "build_from_repo": false,
+        "ports": [
+          {
+            "container_port": 1880,
+            "protocol": "http",
+            "label": "Web UI",
+            "tunnel_expose": true
+          }
+        ],
+        "volumes": [
+          {
+            "name": "nodered-data",
+            "container_path": "/data",
+            "backup": true,
+            "estimated_size_mb": 100
+          }
+        ],
+        "environment": {},
+        "depends_on": []
+      },
+      "resources": {
+        "memory_min_mb": 128,
+        "memory_recommended_mb": 256,
+        "cpu_shares": 256,
+        "disk_min_gb": 1
+      },
+      "health": {
+        "endpoint": "/",
+        "method": "GET",
+        "expected_status": 200,
+        "interval_seconds": 30,
+        "timeout_seconds": 5,
+        "start_period_seconds": 15
+      },
+      "backup": {
+        "strategy": "volume-snapshot",
+        "pre_backup_cmd": null,
+        "post_backup_cmd": null
+      },
+      "upgrade": {
+        "strategy": "pull-and-restart",
+        "auto_update": true,
+        "requires_migration": false,
+        "rollback_safe": true
+      },
+      "metadata": {
+        "homepage": "https://github.com/Avanderheyde/selfstack-registry",
+        "license": "",
+        "auth_builtin": false,
+        "sso_compatible": false,
+        "mobile_friendly": false
+      }
+    },
+    {
+      "name": "twenty",
+      "display_name": "Twenty",
+      "description": "Open-source CRM to manage contacts, companies, deals and sales pipelines",
+      "category": "productivity",
+      "tags": [],
+      "replaces": [],
+      "replaces_display": "HubSpot",
+      "repo": "https://github.com/twentyhq/twenty",
+      "icon": "https://raw.githubusercontent.com/twentyhq/twenty/main/packages/twenty-front/public/images/icons/android/android-launchericon-512-512.png",
+      "version": "1",
+      "verified": false,
+      "container": {
+        "image": "twentycrm/twenty:latest",
+        "build_from_repo": false,
+        "ports": [
+          {
+            "container_port": 3000,
+            "protocol": "http",
+            "label": "Web UI",
+            "tunnel_expose": true
+          }
+        ],
+        "volumes": [
+          {
+            "name": "twenty-server-data",
+            "container_path": "/app/packages/twenty-server/.local-storage",
+            "backup": true,
+            "estimated_size_mb": 100
+          }
+        ],
+        "environment": {
+          "APP_SECRET": "${APP_SECRET:-replace_me_with_openssl_rand_base64_32}",
+          "NODE_PORT": "3000",
+          "PG_DATABASE_URL": "postgres://${PG_DATABASE_USER:-postgres}:${PG_DATABASE_PASSWORD:-postgres}@${PG_DATABASE_HOST:-db}:${PG_DATABASE_PORT:-5432}/${PG_DATABASE_NAME:-default}",
+          "REDIS_URL": "${REDIS_URL:-redis://redis:6379}",
+          "SERVER_URL": "${SERVER_URL:-http://localhost:3000}",
+          "STORAGE_TYPE": "${STORAGE_TYPE:-local}"
+        },
+        "depends_on": [
+          "db",
+          "redis"
+        ]
+      },
+      "sidecars": [
+        {
+          "name": "db",
+          "image": "postgres:16",
+          "volumes": [
+            {
+              "name": "twenty-db-data",
+              "container_path": "/var/lib/postgresql/data",
+              "backup": true,
+              "estimated_size_mb": 100
+            }
+          ],
+          "environment": {
+            "POSTGRES_DB": "${PG_DATABASE_NAME:-default}",
+            "POSTGRES_PASSWORD": "${PG_DATABASE_PASSWORD:-postgres}",
+            "POSTGRES_USER": "${PG_DATABASE_USER:-postgres}"
+          },
+          "resources": {
+            "memory_min_mb": 0,
+            "memory_recommended_mb": 0,
+            "cpu_shares": 0,
+            "disk_min_gb": 0
+          }
+        },
+        {
+          "name": "redis",
+          "image": "redis:7",
+          "command": [
+            "--maxmemory-policy",
+            "noeviction"
+          ],
+          "volumes": [],
+          "environment": {},
+          "resources": {
+            "memory_min_mb": 0,
+            "memory_recommended_mb": 0,
+            "cpu_shares": 0,
+            "disk_min_gb": 0
+          }
+        },
+        {
+          "name": "worker",
+          "image": "twentycrm/twenty:latest",
+          "command": [
+            "yarn",
+            "worker:prod"
+          ],
+          "volumes": [
+            {
+              "name": "twenty-server-data",
+              "container_path": "/app/packages/twenty-server/.local-storage",
+              "backup": true,
+              "estimated_size_mb": 100
+            }
+          ],
+          "environment": {
+            "APP_SECRET": "${APP_SECRET:-replace_me_with_openssl_rand_base64_32}",
+            "DISABLE_CRON_JOBS_REGISTRATION": "true",
+            "DISABLE_DB_MIGRATIONS": "true",
+            "PG_DATABASE_URL": "postgres://${PG_DATABASE_USER:-postgres}:${PG_DATABASE_PASSWORD:-postgres}@${PG_DATABASE_HOST:-db}:${PG_DATABASE_PORT:-5432}/${PG_DATABASE_NAME:-default}",
+            "REDIS_URL": "${REDIS_URL:-redis://redis:6379}",
+            "SERVER_URL": "${SERVER_URL:-http://localhost:3000}",
+            "STORAGE_TYPE": "${STORAGE_TYPE:-local}"
+          },
+          "resources": {
+            "memory_min_mb": 0,
+            "memory_recommended_mb": 0,
+            "cpu_shares": 0,
+            "disk_min_gb": 0
+          }
+        }
+      ],
+      "resources": {
+        "memory_min_mb": 128,
+        "memory_recommended_mb": 256,
+        "cpu_shares": 256,
+        "disk_min_gb": 1
+      },
+      "health": {
+        "endpoint": "/healthz",
+        "method": "GET",
+        "expected_status": 200,
+        "interval_seconds": 30,
+        "timeout_seconds": 5,
+        "start_period_seconds": 15
+      },
+      "backup": {
+        "strategy": "volume-snapshot",
+        "pre_backup_cmd": null,
+        "post_backup_cmd": null
+      },
+      "upgrade": {
+        "strategy": "pull-and-restart",
+        "auto_update": true,
+        "requires_migration": false,
+        "rollback_safe": true
+      },
+      "metadata": {
+        "homepage": "https://github.com/twentyhq/twenty",
+        "license": "",
+        "auth_builtin": false,
+        "sso_compatible": false,
+        "mobile_friendly": false
+      }
+    }
+  ],
+  "categories": [
+    "developer-tools",
+    "finance",
+    "media",
+    "productivity",
+    "utilities"
+  ]
+}
