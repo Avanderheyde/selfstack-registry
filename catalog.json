@@ -1799,6 +1799,99 @@
         "sso_compatible": false,
         "mobile_friendly": false
       }
+    },
+    {
+      "name": "hermes-agent",
+      "display_name": "Hermes Agent",
+      "description": "A private AI agent you text over iMessage, running on your own server",
+      "category": "productivity",
+      "tags": [],
+      "replaces": [],
+      "repo": "https://github.com/NousResearch/hermes-agent",
+      "icon": "https://cdn.jsdelivr.net/gh/NousResearch/hermes-agent@e473f5a9c976a0b5bc292aa415dae28c638a47c3/assets/icon-master.svg",
+      "version": "1",
+      "verified": false,
+      "container": {
+        "image": "nousresearch/hermes-agent:v2026.9.24@sha256:fca358f12efd65bfaaca05884166f15c0e2788375ca30d77061ac1ebc96452b7",
+        "build_from_repo": false,
+        "command": [
+          "sh",
+          "-c",
+          "set -e\nhermes config set model.provider custom\nhermes config set model.base_url \"$SELFSTACK_LLM_BASE_URL\"\nhermes config set model.default selfstack\nhermes config set model.key_env SELFSTACK_LLM_KEY\nhermes config set model.context_length 64000\nexec hermes gateway run --no-supervise --external-supervisor\n"
+        ],
+        "ports": [
+          {
+            "container_port": 8642,
+            "protocol": "http",
+            "label": "Web UI",
+            "tunnel_expose": true
+          }
+        ],
+        "volumes": [
+          {
+            "name": "hermes-data",
+            "container_path": "/opt/data",
+            "backup": true,
+            "estimated_size_mb": 100
+          }
+        ],
+        "environment": {
+          "API_SERVER_HOST": "0.0.0.0",
+          "API_SERVER_KEY": "{{GENERATED}}",
+          "API_SERVER_PORT": "8642",
+          "GATEWAY_ALLOWED_USERS": "{{INPUT:phone}}",
+          "PHOTON_ALLOWED_USERS": "{{INPUT:phone}}",
+          "PHOTON_HOME_CHANNEL": "{{INPUT:phone}}",
+          "PHOTON_PROJECT_ID": "{{PLATFORM:photon.project_id}}",
+          "PHOTON_PROJECT_SECRET": "{{PLATFORM:photon.project_secret}}",
+          "SELFSTACK_LLM_BASE_URL": "{{PLATFORM:llm.base_url}}",
+          "SELFSTACK_LLM_KEY": "{{PLATFORM:llm.key}}"
+        },
+        "depends_on": []
+      },
+      "resources": {
+        "memory_min_mb": 1024,
+        "memory_recommended_mb": 2048,
+        "cpu_shares": 256,
+        "disk_min_gb": 5
+      },
+      "health": {
+        "endpoint": "/health",
+        "method": "GET",
+        "expected_status": 200,
+        "interval_seconds": 30,
+        "timeout_seconds": 5,
+        "start_period_seconds": 15
+      },
+      "backup": {
+        "strategy": "volume-snapshot",
+        "pre_backup_cmd": null,
+        "post_backup_cmd": null
+      },
+      "upgrade": {
+        "strategy": "pull-and-restart",
+        "auto_update": true,
+        "requires_migration": false,
+        "rollback_safe": true
+      },
+      "metadata": {
+        "homepage": "https://github.com/NousResearch/hermes-agent",
+        "license": "",
+        "auth_builtin": false,
+        "sso_compatible": false,
+        "mobile_friendly": false
+      },
+      "inputs": [
+        {
+          "name": "phone",
+          "label": "Your phone number",
+          "type": "phone"
+        }
+      ],
+      "contact": {
+        "address": "{{PLATFORM:photon.number}}",
+        "channel": "imessage"
+      }
     }
   ],
   "categories": [

@@ -1,0 +1,49 @@
+services:
+  app:
+    # Dated release, pinned by digest (multi-arch index). :latest follows
+    # releases and :main is rebuilt on every push.
+    image: nousresearch/hermes-agent:v2026.9.24@sha256:fca358f12efd65bfaaca05884166f15c0e2788375ca30d77061ac1ebc96452b7
+    restart: unless-stopped
+    # With no command the image opens the interactive chat. The gateway is
+    # the service that answers messages. The model can only be set in
+    # /opt/data/config.yaml (it beats every env var), so it is written there
+    # on each boot, which also undoes any in-chat model change. The key stays
+    # out of the file: key_env names the variable it is read from.
+    # --no-supervise --external-supervisor keeps the gateway as the main
+    # process, so Docker sees it exit and restarts it.
+    command:
+      - sh
+      - -c
+      - |
+        set -e
+        hermes config set model.provider custom
+        hermes config set model.base_url "$$SELFSTACK_LLM_BASE_URL"
+        hermes config set model.default selfstack
+        hermes config set model.key_env SELFSTACK_LLM_KEY
+        hermes config set model.context_length 64000
+        exec hermes gateway run --no-supervise --external-supervisor
+    ports:
+      - "${SELFSTACK_HOST_PORT:-8642}:8642"
+    environment:
+      # Selfstack's model proxy: the included model, or the customer's own key.
+      SELFSTACK_LLM_BASE_URL: "{{PLATFORM:llm.base_url}}"
+      SELFSTACK_LLM_KEY: "{{PLATFORM:llm.key}}"
+      # This install's own Photon project and iMessage line.
+      PHOTON_PROJECT_ID: "{{PLATFORM:photon.project_id}}"
+      PHOTON_PROJECT_SECRET: "{{PLATFORM:photon.project_secret}}"
+      # Only the customer's phone may talk to the agent. Without the gateway
+      # allowlist too, strangers who text the line get a pairing code.
+      PHOTON_ALLOWED_USERS: "{{INPUT:phone}}"
+      GATEWAY_ALLOWED_USERS: "{{INPUT:phone}}"
+      PHOTON_HOME_CHANNEL: "{{INPUT:phone}}"
+      # The API server carries /health. It must have a key from the first
+      # boot, or the image generates one into /opt/data/.env that shadows
+      # this forever. Its port is only on the VM's loopback and the tailnet.
+      API_SERVER_KEY: "{{GENERATED}}"
+      API_SERVER_HOST: "0.0.0.0"
+      API_SERVER_PORT: "8642"
+    volumes:
+      - hermes-data:/opt/data
+
+volumes:
+  hermes-data:
