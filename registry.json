@@ -286,6 +286,16 @@
       "verified": false,
       "replaces_display": "Dropbox Plus",
       "replaces_price_cents": 1199
+    },
+    {
+      "name": "hermes-agent",
+      "display_name": "Hermes Agent",
+      "description": "A private AI agent you text over iMessage, running on your own server",
+      "category": "productivity",
+      "repo": "https://github.com/NousResearch/hermes-agent",
+      "path": "apps/hermes-agent",
+      "icon": "https://cdn.jsdelivr.net/gh/NousResearch/hermes-agent@e473f5a9c976a0b5bc292aa415dae28c638a47c3/assets/icon-master.svg",
+      "verified": false
     }
   ],
   "categories": [

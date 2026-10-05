@@ -1,0 +1,36 @@
+name: hermes-agent
+display_name: Hermes Agent
+description: A private AI agent you text over iMessage, running on your own server
+version: "1"
+icon: https://cdn.jsdelivr.net/gh/NousResearch/hermes-agent@e473f5a9c976a0b5bc292aa415dae28c638a47c3/assets/icon-master.svg
+
+runtime:
+  type: docker-compose
+  entry: docker-compose.yml
+
+expose:
+  port: 8642
+  # Served by the gateway's API server without auth; 200 once it is up.
+  health: /health
+
+# Python gateway plus the Node iMessage sidecar, and a browser tool that
+# starts Chromium on demand. The image is about 1 GB compressed.
+resources:
+  memory_min_mb: 1024
+  memory_recommended_mb: 2048
+  disk_min_gb: 5
+
+# Memory, skills, sessions and config live here.
+volumes:
+  - hermes-data:/opt/data
+
+inputs:
+  - name: phone
+    label: Your phone number
+    type: phone
+
+# iMessage only for now. The customer texts the line Photon assigns to this
+# install.
+contact:
+  channel: imessage
+  address: "{{PLATFORM:photon.number}}"
